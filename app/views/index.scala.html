@@ -1,0 +1,27 @@
+@*
+ * This template takes a single argument, a String containing a
+ * message to display.
+ *@
+
+@(personForm: Form[Person])
+
+@import helper._
+
+@*
+ * Call the `main` template with two arguments. The first
+ * argument is a `String` with the title of the page, the second
+ * argument is an `Html` object containing the body of the page.
+ *@
+@main("Welcome to Play") {
+
+  <script type='text/javascript' src='@routes.Assets.versioned("javascripts/index.js")'></script>
+  <ul id="persons"></ul>
+
+    @form(routes.HomeController.addPerson()) {
+      @CSRF.formField
+      @inputText(personForm("name"), '_label -> "Person Name", '_help -> "")
+
+      <input type="submit" value="Submit">
+    }
+
+}
