@@ -3,6 +3,7 @@ package controllers;
 import play.mvc.*;
 import views.html.*;
 import models.Person;
+import models.TripInfo;
 import play.data.FormFactory;
 import play.data.Form;
 import javax.inject.Inject;
@@ -26,8 +27,9 @@ public class HomeController extends Controller {
      */
     public Result index() {
       Form<Person> personForm = formFactory.form(Person.class);
+      Form<TripInfo> tripForm = formFactory.form(TripInfo.class);
 
-      return ok(index.render(personForm));
+      return ok(index.render(personForm, tripForm));
     }
 
     public Result addPerson(Http.Request request) {
@@ -37,9 +39,21 @@ public class HomeController extends Controller {
       return redirect(routes.HomeController.index());
     }
 
+    public Result saveRouteInfo(Http.Request request) {
+      Form<TripInfo> tripInfoForm = formFactory.form(TripInfo.class).bindFromRequest(request);
+      TripInfo tripData = tripInfoForm.get();
+      tripData.save();
+      return redirect(routes.HomeController.index());
+    }
+
     public Result getPersons() {
       List<Person> persons = Person.find.all();
       return ok(Json.toJson(persons));
+    }
+
+    public Result getRoutes() {
+      List<TripInfo> trips = TripInfo.find.all();
+      return ok(Json.toJson(trips));
     }
 
 }
