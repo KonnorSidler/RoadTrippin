@@ -6,6 +6,7 @@
 create table person (
   id                            bigint auto_increment not null,
   name                          varchar(255),
+  location                      varchar(255),
   constraint pk_person primary key (id)
 );
 

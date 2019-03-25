@@ -13,5 +13,7 @@ public class Person extends Model {
 
   public String name;
 
+  public String location;
+
   public static final Finder<Long, Person> find = new Finder<>(Person.class);
 }

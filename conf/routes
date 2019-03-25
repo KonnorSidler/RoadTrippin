@@ -10,8 +10,8 @@ GET     /message                    controllers.AsyncController.message
 
 # Person routing
 +nocsrf
-POST    /person                     controllers.HomeController.addPerson(request: Request)
-GET     /persons                    controllers.HomeController.getPersons()
+POST    /user                       controllers.HomeController.addPerson(request: Request)
+GET     /user                       controllers.HomeController.getPersons()
 
 # Trip routing
 +nocsrf

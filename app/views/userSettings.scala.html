@@ -1,0 +1,23 @@
+@*
+* This template takes a single argument, a String containing a
+* message to display.
+*@
+
+@(personForm: Form[Person])
+
+@import helper._
+
+@*
+* Call the `main` template with two arguments. The first
+* argument is a `String` with the title of the page, the second
+* argument is an `Html` object containing the body of the page.
+*@
+@main("User Settings") {
+
+                @form(routes.HomeController.addPerson()) {
+                    @CSRF.formField
+                    @inputText(personForm("name"), '_label -> "Name: ", '_help -> "")
+                    @inputText(personForm("location"), '_label -> "Home Location: ", '_help -> "")
+                    <input id="submitButton" type="submit" value="Submit">
+                }
+}

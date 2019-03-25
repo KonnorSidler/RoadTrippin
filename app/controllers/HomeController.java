@@ -28,7 +28,6 @@ public class HomeController extends Controller {
     public Result index() {
       Form<Person> personForm = formFactory.form(Person.class);
       Form<Trip> tripForm = formFactory.form(Trip.class);
-
       return ok(index.render(personForm, tripForm));
     }
 
@@ -43,6 +42,13 @@ public class HomeController extends Controller {
       List<Person> persons = Person.find.all();
       return ok(Json.toJson(persons));
     }
+
+//    public Result updateUserLocation(Http.Request request){
+//      Form<Person> locationForm = formFactory.form(Person.class).bindFromRequest(request);
+//      Person personData = locationForm.get();
+//      personData.save();
+//      return redirect(routes.HomeController.index());
+//    }
 
     public Result addTrip(Http.Request request) {
       Form<Trip> tripInfoForm = formFactory.form(Trip.class).bindFromRequest(request);
