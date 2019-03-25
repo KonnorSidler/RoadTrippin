@@ -3,7 +3,7 @@
  * message to display.
  *@
 
-@(personForm: Form[Person])
+@(personForm: Form[Person], tripForm: Form[TripInfo])
 
 @import helper._
 
@@ -108,5 +108,23 @@
 
     <script type='text/javascript' src='@routes.Assets.versioned("javascripts/main.js")'></script>
 
+
+    <h1> Route Information </h1>
+
+    @form(routes.HomeController.saveRouteInfo()) {
+      @CSRF.formField
+      @inputText(tripForm("startLocation"), '_label -> "Start Location", '_help -> "")
+      @inputText(tripForm("endLocation"), '_label -> "End Location", '_help -> "")
+      <select value="stopCount" name="unittype" required>
+        <option value=""> 0 </option>
+        <option value="1"> 1 </option>
+        <option value="2"> 2 </option>
+        <option value="3"> 3 </option>
+        <option value="4"> 4 </option>
+        <option value="5"> 5 </option>
+      </select>
+
+      <input type="submit" value="Submit">
+    }
 
 }

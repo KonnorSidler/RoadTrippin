@@ -9,10 +9,17 @@ GET     /count                      controllers.CountController.count
 # An example controller showing how to write asynchronous code
 GET     /message                    controllers.AsyncController.message
 
+# Person routing
 +nocsrf
 POST    /person                     controllers.HomeController.addPerson(request: Request)
-
 GET     /persons                    controllers.HomeController.getPersons()
+
+# tripInfo routing
++nocsrf
+POST    /tripInfo                   controllers.HomeController.saveRouteInfo(Request: Request)
+GET     /trips                      controllers.HomeController.getRoutes()
+
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
