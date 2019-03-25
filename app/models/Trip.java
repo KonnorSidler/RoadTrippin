@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class TripInfo extends Model {
+public class Trip extends Model {
 
   @Id
   public long tripId;
@@ -17,5 +17,5 @@ public class TripInfo extends Model {
 
   public int stopCount;
 
-  public static final Finder<Long, TripInfo> find = new Finder<>(TripInfo.class);
+  public static final Finder<Long, Trip> find = new Finder<>(Trip.class);
 }

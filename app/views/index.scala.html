@@ -3,7 +3,7 @@
  * message to display.
  *@
 
-@(personForm: Form[Person], tripForm: Form[TripInfo])
+@(personForm: Form[Person], tripForm: Form[Trip])
 
 @import helper._
 
@@ -26,11 +26,11 @@
 
     <h1> Route Information </h1>
 
-    @form(routes.HomeController.saveRouteInfo()) {
+    @form(routes.HomeController.addTrip()) {
       @CSRF.formField
       @inputText(tripForm("startLocation"), '_label -> "Start Location", '_help -> "")
       @inputText(tripForm("endLocation"), '_label -> "End Location", '_help -> "")
-      <select value="stopCount" name="unittype" required>
+      <select value="stopCount" name="stops" required>
         <option value=""> 0 </option>
         <option value="1"> 1 </option>
         <option value="2"> 2 </option>

@@ -4,8 +4,7 @@
 
 # An example controller showing a sample home page
 GET     /                           controllers.HomeController.index
-# An example controller showing how to use dependency injection
-GET     /count                      controllers.CountController.count
+
 # An example controller showing how to write asynchronous code
 GET     /message                    controllers.AsyncController.message
 
@@ -14,9 +13,9 @@ GET     /message                    controllers.AsyncController.message
 POST    /person                     controllers.HomeController.addPerson(request: Request)
 GET     /persons                    controllers.HomeController.getPersons()
 
-# tripInfo routing
+# Trip routing
 +nocsrf
-POST    /tripInfo                   controllers.HomeController.saveRouteInfo(Request: Request)
+POST    /trips                      controllers.HomeController.addTrip(request: Request)
 GET     /trips                      controllers.HomeController.getRoutes()
 
 
