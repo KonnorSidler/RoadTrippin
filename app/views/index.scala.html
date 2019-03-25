@@ -14,14 +14,99 @@
  *@
 @main("Welcome to Play") {
 
+
+
   <script type='text/javascript' src='@routes.Assets.versioned("javascripts/index.js")'></script>
-  <ul id="persons"></ul>
+    <div id="main">
+        <div id="map"></div>
 
-    @form(routes.HomeController.addPerson()) {
-      @CSRF.formField
-      @inputText(personForm("name"), '_label -> "Person Name", '_help -> "")
+        <div id="side_bar">
+            <center>
+                <h2>Location</h2>
+                <form id="start_location_form" action="addRating.php">Start: <input name="start" type="text" id="start_input_form"></form>
+                <br>
+                <form id="end_location_form" action="addRating.php">Finish: <input  name="end" type="text" id="end_input_form"></form>
 
-      <input type="submit" value="Submit">
-    }
+                <br>
+                Number of Waypoints
+                <select id="number_of_waypoints">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+
+                <br>
+                <br>
+                Trip Type
+                <select id="trip_type">
+                    <option value="Food">Food</option>
+                    <option value="Entertainment">Entertainment</option>
+                </select>
+                <br>
+                <br>
+                <button id="submitButton">Submit</button>
+            </center>
+
+
+            <br>
+
+            <div id="direction_div">
+
+            </div>
+
+            <div id="rating_div">
+                <br>
+                <center>
+                    <button id="rating_submit">Rate This Route!</button>
+                    <select id="route_rating">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </center>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+    <script>
+            //Initilizes the map and sets up routing services.
+            var map;
+            var directionsService;
+            var directionsDisplay;
+            var service;
+
+            function initMap() {
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: {lat: 39.0119, lng: -98.4842},
+                    zoom: 5
+                });
+
+                service = new google.maps.places.PlacesService(map);
+
+                directionsService = new google.maps.DirectionsService();
+                directionsDisplay = new google.maps.DirectionsRenderer();
+                directionsDisplay.setMap(map);
+                //Event listener for submit button
+                document.getElementById('submitButton').addEventListener('click', function() {
+                    calculateRoute(directionsService, directionsDisplay);
+                });
+            }
+    </script>
+
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYZdCpCHLlMxV_gdqMUV-4c6t9iFhLaxM&libraries=places&callback=initMap"
+    type="text/javascript"></script>
+
+    <script type='text/javascript' src='@routes.Assets.versioned("javascripts/main.js")'></script>
+
 
 }
