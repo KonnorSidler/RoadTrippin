@@ -16,9 +16,11 @@ GET     /persons                    controllers.HomeController.getPersons()
 
 # tripInfo routing
 +nocsrf
-POST    /tripInfo                   controllers.HomeController.saveRouteInfo(Request: Request)
+POST    /tripInfo                   controllers.HomeController.saveRouteInfo(request: Request)
 GET     /trips                      controllers.HomeController.getRoutes()
 
+POST    /saveTripRating             controllers.HomeController.saveTripRating(request: Request)
+GET     /tripRating                 controllers.HomeController.getTripRating()
 
 
 # Map static resources from the /public folder to the /assets URL path

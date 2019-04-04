@@ -1,5 +1,6 @@
 package controllers;
 
+import models.TripRating;
 import play.mvc.*;
 import views.html.*;
 import models.Person;
@@ -28,6 +29,8 @@ public class HomeController extends Controller {
     public Result index() {
       Form<Person> personForm = formFactory.form(Person.class);
       Form<TripInfo> tripForm = formFactory.form(TripInfo.class);
+      Form<TripRating> tripRating = formFactory.form(TripRating.class);
+
 
       return ok(index.render(personForm, tripForm));
     }
@@ -46,6 +49,13 @@ public class HomeController extends Controller {
       return redirect(routes.HomeController.index());
     }
 
+    public Result saveTripRating(Http.Request request) {
+      Form<TripRating> tripRatingForm = formFactory.form(TripRating.class).bindFromRequest(request);
+      TripRating rating = tripRatingForm.get();
+      rating.save();
+      return redirect(routes.HomeController.index());
+    }
+
     public Result getPersons() {
       List<Person> persons = Person.find.all();
       return ok(Json.toJson(persons));
@@ -54,6 +64,11 @@ public class HomeController extends Controller {
     public Result getRoutes() {
       List<TripInfo> trips = TripInfo.find.all();
       return ok(Json.toJson(trips));
+    }
+
+    public Result getTripRating() {
+      List<TripRating> ratings = TripRating.find.all();
+      return ok(Json.toJson(ratings));
     }
 
 }
