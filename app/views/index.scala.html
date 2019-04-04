@@ -115,10 +115,12 @@
 
     <h1> Route Information </h1>
 
-    @form(routes.HomeController.saveRouteInfo()) {
+    <form action="@routes.HomeController.saveRouteInfo()" method="post">
       @CSRF.formField
-      @inputText(tripForm("startLocation"), '_label -> "Start Location", '_help -> "")
-      @inputText(tripForm("endLocation"), '_label -> "End Location", '_help -> "")
+      Start Location: <br>
+      <input type=text name="startLocation">
+      End Location: <br>
+      <input type=text name="endLocation">
       <select value="stopCount" name="unittype" required>
         <option value=""> 0 </option>
         <option value="1"> 1 </option>
@@ -129,6 +131,6 @@
       </select>
 
       <input type="submit" value="Submit">
-    }
+    </form>
 
 }
