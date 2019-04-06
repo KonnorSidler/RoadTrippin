@@ -9,13 +9,13 @@ import javax.persistence.Id;
 public class TripInfo extends Model {
 
     @Id
-    public long tripId;
+    private long tripId;
 
-    public String startLocation;
+    private String startLocation;
 
-    public String endLocation;
+    private String endLocation;
 
-    public int stopCount;
+    private int stopCount;
 
     public static final Finder<Long, TripInfo> find = new Finder<>(TripInfo.class);
 
