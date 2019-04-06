@@ -4,13 +4,13 @@
 # --- !Ups
 
 create table person (
-  id                            bigint auto_increment not null,
+  id                            bigserial not null,
   name                          varchar(255),
   constraint pk_person primary key (id)
 );
 
 create table trip_info (
-  trip_id                       bigint auto_increment not null,
+  trip_id                       bigserial not null,
   start_location                varchar(255),
   end_location                  varchar(255),
   stop_count                    integer not null,
@@ -20,7 +20,7 @@ create table trip_info (
 
 # --- !Downs
 
-drop table if exists person;
+drop table if exists person cascade;
 
-drop table if exists trip_info;
+drop table if exists trip_info cascade;
 
