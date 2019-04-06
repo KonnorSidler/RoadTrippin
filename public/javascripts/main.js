@@ -108,6 +108,9 @@ function calculateRoute(directionsService, directionsDisplay) {
                                                     }
                                                 });
 
+
+                                                return final_result;
+
                                             }
                                         }
                                     });

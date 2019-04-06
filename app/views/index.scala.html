@@ -20,6 +20,7 @@
   <script type='text/javascript' src='@routes.Assets.versioned("javascripts/index.js")'></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
+
     <div id="main">
         <div id="map"></div>
 
@@ -48,8 +49,9 @@
                 </select>
                 <br>
 
-                <input type="submit" value="Save Route">
+
               </form>
+
 
                 <br>
                 <br>
@@ -65,17 +67,11 @@
 
 
             <br>
+            <center>
+                <button id="save_trip">Save Route</button>
+            </center>
 
-            <div id="direction_div">
 
-            </div>
-
-            <div id="rating_div">
-                <br>
-                <center>
-                    <button id="rating_submit">Test Submit</button>
-                </center>
-            </div>
         </div>
 
     </div>
@@ -91,6 +87,8 @@
             var directionsDisplay;
             var service;
 
+            var final_route;
+
             function initMap() {
                 map = new google.maps.Map(document.getElementById('map'), {
                     center: {lat: 39.0119, lng: -98.4842},
@@ -104,9 +102,36 @@
                 directionsDisplay.setMap(map);
                 //Event listener for submit button
                 document.getElementById('submitButton').addEventListener('click', function() {
-                    calculateRoute(directionsService, directionsDisplay);
+                    final_route = calculateRoute(directionsService, directionsDisplay);
                 });
             }
+    </script>
+    <script>
+
+
+            var data = JSON.stringify(final_route);
+
+            $(document).ready(function(){
+                $("#save_trip").click(function(){
+                    $.ajax({
+                        type : 'POST',
+                        url : '@routes.HomeController.testLink',
+                        data : data,
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        success : function(data) {
+                            console.log("Success");
+                            console.log(data);
+                        },
+                        error : function(data) {
+                            console.log("Fail");
+                            console.log(data);
+                        }
+                    });
+                });
+            });
+
+
     </script>
 
 
