@@ -91,6 +91,23 @@ function calculateRoute(directionsService, directionsDisplay) {
                                                 directionsDisplay.setDirections(final_result);
                                                 console.log(final_result);
 
+                                                var data = JSON.stringify(final_result);
+                                                $.ajax({
+                                                    type : 'POST',
+                                                    url : '@routes.HomeController.testLink',
+                                                    data : data,
+                                                    dataType: 'json',
+                                                    contentType: 'application/json',
+                                                    success : function(data) {
+                                                        console.log("Success");
+                                                        console.log(data);
+                                                    },
+                                                    error : function(data) {
+                                                        console.log("Fail");
+                                                        console.log(data);
+                                                    }
+                                                });
+
                                             }
                                         }
                                     });

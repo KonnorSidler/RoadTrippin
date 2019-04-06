@@ -10,6 +10,8 @@ import javax.inject.Inject;
 import java.util.List;
 import io.ebean.Model;
 import play.libs.Json;
+
+
 /**
  * This controller contains an action to handle HTTP requests
  * to the application's home page.
@@ -54,6 +56,12 @@ public class HomeController extends Controller {
     public Result getRoutes() {
       List<TripInfo> trips = TripInfo.find.all();
       return ok(Json.toJson(trips));
+    }
+
+    public Result testLink(Http.Request request) {
+
+      return ok("Got it!" + request.body().asJson());
+
     }
 
 }
