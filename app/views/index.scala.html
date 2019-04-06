@@ -14,6 +14,10 @@
  *@
 @main("Welcome to Play") {
 
+    <head>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+
 
 
   <script type='text/javascript' src='@routes.Assets.versioned("javascripts/index.js")'></script>
@@ -22,20 +26,31 @@
 
         <div id="side_bar">
             <center>
-                <h2>Location</h2>
-                <form id="start_location_form" action="addRating.php">Start: <input name="start" type="text" id="start_input_form"></form>
-                <br>
-                <form id="end_location_form" action="addRating.php">Finish: <input  name="end" type="text" id="end_input_form"></form>
+              <h1> Route Information </h1>
 
+              <form action="@routes.HomeController.saveRouteInfo()" method="post">
+                @CSRF.formField
+                Start Location: <br>
+                <input type="text" name="startLocation" id="start_input_form">
                 <br>
-                Number of Waypoints
-                <select id="number_of_waypoints">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
+                <br>
+                End Location: <br>
+                <input type="text" name="endLocation" id="end_input_form">
+                <br>
+                <br>
+                <h1> Number of Waypoints </h1>
+                <select name="stopCount" id="number_of_waypoints" required>
+
+                  <option value="1"> 1 </option>
+                  <option value="2"> 2 </option>
+                  <option value="3"> 3 </option>
+                  <option value="4"> 4 </option>
+                  <option value="5"> 5 </option>
                 </select>
+                <br>
+
+                <input type="submit" value="Save Route">
+              </form>
 
                 <br>
                 <br>
@@ -46,7 +61,7 @@
                 </select>
                 <br>
                 <br>
-                <button id="submitButton">Submit</button>
+                <button id="submitButton">Plot Route</button>
             </center>
 
 
@@ -109,22 +124,6 @@
     <script type='text/javascript' src='@routes.Assets.versioned("javascripts/main.js")'></script>
 
 
-    <h1> Route Information </h1>
 
-    @form(routes.HomeController.saveRouteInfo()) {
-      @CSRF.formField
-      @inputText(tripForm("startLocation"), '_label -> "Start Location", '_help -> "")
-      @inputText(tripForm("endLocation"), '_label -> "End Location", '_help -> "")
-      <select value="stopCount" name="unittype" required>
-        <option value=""> 0 </option>
-        <option value="1"> 1 </option>
-        <option value="2"> 2 </option>
-        <option value="3"> 3 </option>
-        <option value="4"> 4 </option>
-        <option value="5"> 5 </option>
-      </select>
-
-      <input type="submit" value="Submit">
-    }
 
 }
