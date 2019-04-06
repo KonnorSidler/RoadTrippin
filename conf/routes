@@ -9,11 +9,6 @@ GET     /count                      controllers.CountController.count
 # An example controller showing how to write asynchronous code
 GET     /message                    controllers.AsyncController.message
 
-# Person routing
-+nocsrf
-POST    /person                     controllers.HomeController.addPerson(request: Request)
-GET     /persons                    controllers.HomeController.getPersons()
-
 # tripInfo routing
 +nocsrf
 POST    /tripInfo                   controllers.HomeController.saveRouteInfo(request: Request)
@@ -29,8 +24,6 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
 +nocsrf
 POST    /trip/save                  controllers.HomeController.testLink(request: Request)
-
-
 
 +nocsrf
 GET     /user                       controllers.UserController.returnHome()

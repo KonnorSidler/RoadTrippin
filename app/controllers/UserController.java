@@ -7,7 +7,7 @@ import play.data.FormFactory;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
-import views.html.*;
+import views.html.UserSettings;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -19,7 +19,7 @@ public class UserController extends Controller {
 
     public Result returnHome(){
         Form<User> userForm = formFactory.form(User.class);
-        return ok(userSettings.render(userForm));
+        return ok(UserSettings.render(userForm));
     }
 
     public Result getUser(Http.Request request){
@@ -41,7 +41,7 @@ public class UserController extends Controller {
         newUserInfo.setLocation(user.getLocation());
         newUserInfo.setName(user.getName());
         newUserInfo.save();
-        return ok(userSettings.render(userForm));
+        return ok(UserSettings.render(userForm));
     }
 
     public Result createUser(Http.Request request){
@@ -52,6 +52,6 @@ public class UserController extends Controller {
         newUser.setId(System.currentTimeMillis());
         newUser.setName(user.getName());
         newUser.save();
-        return ok(userSettings.render(userForm));
+        return ok(UserSettings.render(userForm));
     }
 }

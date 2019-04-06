@@ -1,9 +1,9 @@
 package controllers;
 
 import models.TripRating;
+import models.User;
 import play.mvc.*;
 import views.html.*;
-import models.Person;
 import models.TripInfo;
 import play.data.FormFactory;
 import play.data.Form;
@@ -28,18 +28,11 @@ public class HomeController extends Controller {
      * <code>GET</code> request with a path of <code>/</code>.
      */
     public Result index() {
-        Form<Person> personForm = formFactory.form(Person.class);
+        Form<User> userForm = formFactory.form(User.class);
         Form<TripInfo> tripForm = formFactory.form(TripInfo.class);
         Form<TripRating> tripRating = formFactory.form(TripRating.class);
 
-        return ok(index.render(personForm, tripForm));
-    }
-
-    public Result addPerson(Http.Request request) {
-        Form<Person> personForm = formFactory.form(Person.class).bindFromRequest(request);
-        Person person = personForm.get();
-        person.save();
-        return redirect(routes.HomeController.index());
+        return ok(index.render(userForm, tripForm));
     }
 
     public Result saveRouteInfo(Http.Request request) {
@@ -54,11 +47,6 @@ public class HomeController extends Controller {
         TripRating rating = tripRatingForm.get();
         rating.save();
         return redirect(routes.HomeController.index());
-    }
-
-    public Result getPersons() {
-        List<Person> persons = Person.find.all();
-        return ok(Json.toJson(persons));
     }
 
     public Result getRoutes() {
