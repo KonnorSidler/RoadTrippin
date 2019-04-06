@@ -3,7 +3,7 @@
 * message to display.
 *@
 
-@(personForm: Form[Person])
+@(userForm: Form[User])
 
 @import helper._
 
@@ -14,10 +14,33 @@
 *@
 @main("User Settings") {
 
-                @form(routes.HomeController.addPerson()) {
-                    @CSRF.formField
-                    @inputText(personForm("name"), '_label -> "Name: ", '_help -> "")
-                    @inputText(personForm("location"), '_label -> "Home Location: ", '_help -> "")
-                    <input id="submitButton" type="submit" value="Submit">
-                }
+    <head><b>User Settings</b></head>
+    <body>
+        <b1>Create user</b1>
+        <form class="input-form" action="@routes.UserController.createUser()" method="post">
+            @CSRF.formField
+            <input type="text" name="name" id="user_name_input">
+            <input type="text" name="location" id="user_location_input">
+            <input type="submit" value="Create user">
+        </form>
+        <b1>Update user</b1>
+        <form class="input-form" action="@routes.UserController.updateUser()" method="put">
+            @CSRF.formField
+            <input type="text" name="id" id="id_input">
+            <input type="text" name="name" id="user_name_input">
+            <input type="text" name="location" id="user_location_input">
+            <input type="submit" value="Update user">
+        </form>
+        <b1>Get user</b1>
+        <form class="input-form" action="@routes.UserController.getUser()" method="get">
+            @CSRF.formField
+            <input type="text" name="id" id="id_input">
+            <input type="submit" value="Get user">
+        </form>
+        <b1>Get all users</b1>
+        <form class="input-form" action="@routes.UserController.listUsers()" method="get">
+            <input type="submit" value="Get all users">
+        </form>
+    </body>
+    <footer></footer>
 }

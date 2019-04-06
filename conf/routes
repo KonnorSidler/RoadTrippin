@@ -8,10 +8,13 @@ GET     /                           controllers.HomeController.index
 # An example controller showing how to write asynchronous code
 GET     /message                    controllers.AsyncController.message
 
-# Person routing
+# User routing
 +nocsrf
-POST    /user                       controllers.HomeController.addPerson(request: Request)
-GET     /user                       controllers.HomeController.getPersons()
+GET     /user                       controllers.UserController.returnHome()
+GET     /user/find                  controllers.UserController.getUser(request: Request)
+PUT     /user                       controllers.UserController.updateUser(request: Request)
+POST    /user                       controllers.UserController.createUser(request: Request)
+GET     /user/all                   controllers.UserController.listUsers()
 
 # Trip routing
 +nocsrf

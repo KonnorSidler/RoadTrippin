@@ -3,7 +3,7 @@
  * message to display.
  *@
 
-@(personForm: Form[Person], tripForm: Form[Trip])
+@(userForm: Form[User], tripForm: Form[Trip])
 
 @import helper._
 
@@ -19,12 +19,12 @@
         <div id="map"></div>
 
         <div id="side_bar">
-            @form(routes.HomeController.addPerson()) {
+            <form class="input-form" action="@routes.UserController.createUser()" method="post">
                 @CSRF.formField
-                @inputText(personForm("name"), '_label -> "Name: ", '_help -> "")
-                @inputText(personForm("location"), '_label -> "Home Location: ", '_help -> "")
-                <input id="submitButton" type="submit" value="Submit">
-            }
+                <input type="text" name="name" id="user_name_input">
+                <input type="text" name="location" id="user_location_input">
+                <input type="submit" value="Create user">
+            </form>
             <center>
                 <h2>Location</h2>
                 @form(routes.HomeController.addTrip()) {
