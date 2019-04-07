@@ -14,8 +14,6 @@ GET     /message                    controllers.AsyncController.message
 POST    /tripInfo                   controllers.HomeController.saveRouteInfo(request: Request)
 GET     /trips                      controllers.HomeController.getRoutes()
 
-POST    /saveTripRating             controllers.HomeController.saveTripRating(request: Request)
-GET     /tripRating                 controllers.HomeController.getTripRating()
 
 # Database Test Controller Routes
 +nocsrf
@@ -27,12 +25,21 @@ GET     /viewDBTest                 controllers.DatabaseTestController.getDBTest
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
 
+# Test for sending route info, will be removed
 +nocsrf
 POST    /trip/save                  controllers.HomeController.testLink(request: Request)
 
+
+# User routing
 +nocsrf
 GET     /user                       controllers.UserController.returnHome()
 GET     /user/find                  controllers.UserController.getUser(request: Request)
 PUT     /user                       controllers.UserController.updateUser(request: Request)
 POST    /user                       controllers.UserController.createUser(request: Request)
 GET     /user/all                   controllers.UserController.listUsers()
+
+
+# Rating routing
++nocsrf
+POST    /ratings/add                controllers.RatingsController.addRating(request : Request)
+GET     /ratings                    controllers.RatingsController.getRatings()

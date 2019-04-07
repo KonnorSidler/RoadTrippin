@@ -61,7 +61,8 @@
                     </select>
                     <br>
                     <br>
-                    <button id="submitButton" onclick="call()">Plot Route</button>
+                    <button id="submitButton" onclick="plot()">Plot Route</button>
+                    <p id="routeID"></p>
                     <br>
                     <br>
 
@@ -70,7 +71,7 @@
                 <div id="ratings">
                         <br>
 
-                    <button id="rating_submit">Rate</button>
+                    <button id="rating_submit" onclick="submitRating()">Rate</button>
                     <select id="route_rating">
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -109,16 +110,49 @@
 
     <script>
 
-            async function call() {
+            async function plot() {
 
                 var final_route = await calculateRoute(directionsService, directionsDisplay);
                 var x = document.getElementById("ratings");
+                var y =document.getElementById("routeID");
                 x.style.display = "block";
-                var data = JSON.stringify(final_route.request);
+
+                var data = JSON.stringify({"start" : final_route.request.origin.query,
+                                            "end" : final_route.request.destination.query,
+                                            "waypoints" : final_route.request.waypoints});
                 $.ajax({
                     type : 'POST',
-                    url : '@routes.HomeController.testLink',
+                    url : '@routes.HomeController.saveRouteInfo',
                     data : data,
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    success : function(data) {
+                        console.log("Success");
+                        console.log(data);
+                    },
+                    error : function(data) {
+                        console.log("Fail");
+                        console.log(data);
+                        y.innerHTML = parseInt(data.responseText);
+                        y.style.display = "none";
+                    }
+                });
+
+
+
+
+            }
+
+
+            function submitRating() {
+                var x  = document.getElementById("route_rating").value;
+                var y = document.getElementById("routeID").innerText;
+                var data = {"trip_rating" : x,
+                            "trip_id" : y};
+                $.ajax({
+                    type : 'POST',
+                    url : '@routes.RatingsController.addRating',
+                    data : JSON.stringify(data),
                     dataType: 'json',
                     contentType: 'application/json',
                     success : function(data) {
@@ -130,7 +164,6 @@
                         console.log(data);
                     }
                 });
-
 
             }
     </script>

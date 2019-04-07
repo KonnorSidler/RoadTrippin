@@ -11,6 +11,9 @@ import javax.inject.Inject;
 import java.util.List;
 import io.ebean.Model;
 import play.libs.Json;
+import play.libs.Json.*;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 
 /**
@@ -35,29 +38,28 @@ public class HomeController extends Controller {
         return ok(index.render(userForm, tripForm));
     }
 
+
+
+
+
+
     public Result saveRouteInfo(Http.Request request) {
-        Form<TripInfo> tripInfoForm = formFactory.form(TripInfo.class).bindFromRequest(request);
-        TripInfo tripData = tripInfoForm.get();
-        tripData.save();
-        return redirect(routes.HomeController.index());
+        JsonNode json = request.body().asJson();
+        TripInfo trip = new TripInfo();
+        trip.setStartLocation(json.findPath("start").textValue());
+        trip.setEndLocation(json.findPath("end").textValue());
+        trip.save();
+        return ok(Long.toString(trip.getTripId()) + "n");
     }
 
-    public Result saveTripRating(Http.Request request) {
-        Form<TripRating> tripRatingForm = formFactory.form(TripRating.class).bindFromRequest(request);
-        TripRating rating = tripRatingForm.get();
-        rating.save();
-        return redirect(routes.HomeController.index());
-    }
 
     public Result getRoutes() {
         List<TripInfo> trips = TripInfo.find.all();
         return ok(Json.toJson(trips));
     }
 
-    public Result getTripRating() {
-        List<TripRating> ratings = TripRating.find.all();
-        return ok(Json.toJson(ratings));
-    }
+
+
 
     public Result testLink(Http.Request request) {
 
