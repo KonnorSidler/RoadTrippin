@@ -22,6 +22,11 @@ GET     /trips                      controllers.HomeController.getRoutes()
 POST    /saveTripRating             controllers.HomeController.saveTripRating(request: Request)
 GET     /tripRating                 controllers.HomeController.getTripRating()
 
+# Database Test Controller Routes
++nocsrf
+GET     /dbTest                     controllers.DatabaseTestController.returnToDBTest
+POST    /saveDBTest                 controllers.DatabaseTestController.saveDatabaseTest(request: Request)
+GET     /viewDBTest                 controllers.DatabaseTestController.getDBTests()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
