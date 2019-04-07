@@ -3,7 +3,7 @@
  * message to display.
  *@
 
-@(personForm: Form[Person], tripForm: Form[TripInfo])
+@(userForm: Form[User], tripForm: Form[TripInfo])
 
 @import helper._
 
@@ -22,59 +22,55 @@
 
 
     <div id="main">
+
+
         <div id="map"></div>
 
         <div id="side_bar">
             <center>
-              <h1> Route Information </h1>
+                  <h1> Route Information </h1>
+                  <form action="@routes.HomeController.saveRouteInfo()" method="post">
+                    @CSRF.formField
+                    Start Location: <br>
+                    <input type="text" name="startLocation" id="start_input_form">
+                    <br>
+                    <br>
+                    End Location: <br>
+                    <input type="text" name="endLocation" id="end_input_form">
+                    <br>
+                    <br>
+                    <h1> Number of Waypoints </h1>
+                    <select name="stopCount" id="number_of_waypoints" required>
 
-              <form action="@routes.HomeController.saveRouteInfo()" method="post">
-                @CSRF.formField
-                Start Location: <br>
-                <input type="text" name="startLocation" id="start_input_form">
-                <br>
-                <br>
-                End Location: <br>
-                <input type="text" name="endLocation" id="end_input_form">
-                <br>
-                <br>
-                <h1> Number of Waypoints </h1>
-                <select name="stopCount" id="number_of_waypoints" required>
-
-                  <option value="1"> 1 </option>
-                  <option value="2"> 2 </option>
-                  <option value="3"> 3 </option>
-                  <option value="4"> 4 </option>
-                  <option value="5"> 5 </option>
-                </select>
-                <br>
-
-
-              </form>
+                      <option value="1"> 1 </option>
+                      <option value="2"> 2 </option>
+                      <option value="3"> 3 </option>
+                      <option value="4"> 4 </option>
+                      <option value="5"> 5 </option>
+                    </select>
+                    <br>
+                  </form>
 
 
-                <br>
-                <br>
-                Trip Type
-                <select id="trip_type">
-                    <option value="Food">Food</option>
-                    <option value="Entertainment">Entertainment</option>
-                </select>
-                <br>
-                <br>
-                <button id="submitButton" onclick="showRatingDiv()">Plot Route</button>
-            </center>
+                    <br>
+                    <br>
+                    Trip Type
+                    <select id="trip_type">
+                        <option value="Food">Food</option>
+                        <option value="Entertainment">Entertainment</option>
+                    </select>
+                    <br>
+                    <br>
+                    <button id="submitButton" onclick="call()">Plot Route</button>
+                    <br>
+                    <br>
+                    <button id="save_trip">Save Route</button>
 
 
-            <br>
-            <center>
-                <button id="save_trip">Save Route</button>
-            </center>
 
+                <div id="ratings">
+                        <br>
 
-            <div id="rating_div">
-                <br>
-                <center>
                     <button id="rating_submit">Rate This Route!</button>
                     <select id="route_rating">
                         <option value="1">1</option>
@@ -83,10 +79,9 @@
                         <option value="4">4</option>
                         <option value="5">5</option>
                     </select>
-                </center>
-            </div>
+                </div>
+            </center>
         </div>
-
     </div>
 
 
@@ -99,9 +94,6 @@
             var directionsService;
             var directionsDisplay;
             var service;
-
-            var final_route;
-
             function initMap() {
                 map = new google.maps.Map(document.getElementById('map'), {
                     center: {lat: 39.0119, lng: -98.4842},
@@ -113,38 +105,35 @@
                 directionsService = new google.maps.DirectionsService();
                 directionsDisplay = new google.maps.DirectionsRenderer();
                 directionsDisplay.setMap(map);
-                //Event listener for submit button
-                document.getElementById('submitButton').addEventListener('click', function() {
-                    final_route = calculateRoute(directionsService, directionsDisplay);
-                });
             }
     </script>
+
     <script>
 
+            async function call() {
 
-            var data = JSON.stringify(final_route);
-
-            $(document).ready(function(){
-                $("#save_trip").click(function(){
-                    $.ajax({
-                        type : 'POST',
-                        url : '@routes.HomeController.testLink',
-                        data : data,
-                        dataType: 'json',
-                        contentType: 'application/json',
-                        success : function(data) {
-                            console.log("Success");
-                            console.log(data);
-                        },
-                        error : function(data) {
-                            console.log("Fail");
-                            console.log(data);
-                        }
-                    });
+                var final_route = await calculateRoute(directionsService, directionsDisplay);
+                var x = document.getElementById("ratings");
+                x.style.display = "block";
+                var data = JSON.stringify(final_route.request);
+                $.ajax({
+                    type : 'POST',
+                    url : '@routes.HomeController.testLink',
+                    data : data,
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    success : function(data) {
+                        console.log("Success");
+                        console.log(data);
+                    },
+                    error : function(data) {
+                        console.log("Fail");
+                        console.log(data);
+                    }
                 });
-            });
 
 
+            }
     </script>
 
 

@@ -3,17 +3,13 @@
 
 # --- !Ups
 
+
 create table database_test (
   id                            bigserial not null,
   database_message              varchar(255),
   constraint pk_database_test primary key (id)
 );
 
-create table person (
-  id                            bigserial not null,
-  name                          varchar(255),
-  constraint pk_person primary key (id)
-);
 
 create table trip_info (
   trip_id                       bigserial not null,
@@ -35,7 +31,17 @@ create table trip_rating (
 );
 
 
-# --- !Downs
+
+create table user (
+  id                            bigserial not null,
+  name                          varchar(255),
+  location                      varchar(255),
+  password                      varchar(255),
+  constraint pk_user primary key (id)
+);
+
+
+
 
 drop table if exists database_test cascade;
 
@@ -44,4 +50,6 @@ drop table if exists person cascade;
 drop table if exists trip_info cascade;
 
 drop table if exists trip_rating cascade;
+
+drop table if exists user cascade;
 

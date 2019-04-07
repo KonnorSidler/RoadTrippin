@@ -11,13 +11,19 @@
     <head>
         @* Here's where we render the page title `String`. *@
         <title>@title</title>
+
+        <link rel="stylesheet" href='@routes.Assets.versioned("stylesheets/div_styles.css")'>
         <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+
+
         <meta name="description" content="Road Trip generation">
         <meta name='author' content="Thomas Shoff">
         <meta charset="utf-8">
         <meta name="keywords" content="road trips, free">
         <meta name="viewport" content="width=device-width">
+
+
         <script src="@routes.Assets.versioned("javascripts/hello.js")" type="text/javascript"></script>
             <style>
           #main {
