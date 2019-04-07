@@ -12,4 +12,15 @@ In the Pipeline:
   <li>Page of trips displayed by different filters (Highest rated, most traveled, etc)</li>
   <li>Redesign of generation page</li>
  <ul>
+   
+ Sprint 2 Estimate: Story Points 4,7
+-	Route constraints
+  -	Time
+  -	Distance
+  -	Number of stops
+  -	Stop type
+-	Static locations 
+  -	Home
+  -	Work 
+  -	Frequently visited places
 
