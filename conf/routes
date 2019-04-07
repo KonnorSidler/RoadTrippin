@@ -34,7 +34,9 @@ POST    /trip/save                  controllers.HomeController.testLink(request:
 +nocsrf
 GET     /user                       controllers.UserController.returnHome()
 GET     /user/find                  controllers.UserController.getUser(request: Request)
++nocsrf
 PUT     /user                       controllers.UserController.updateUser(request: Request)
++nocsrf
 POST    /user                       controllers.UserController.createUser(request: Request)
 GET     /user/all                   controllers.UserController.listUsers()
 
