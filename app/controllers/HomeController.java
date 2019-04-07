@@ -46,7 +46,9 @@ public class HomeController extends Controller {
 
     public Result saveRouteInfo(Http.Request request) {
         JsonNode json = request.body().asJson();
-        TripInfo trip = new TripInfo(json.findPath("start").textValue(), json.findPath("end").textValue());
+        TripInfo trip = new TripInfo();
+        trip.setStartLocation(json.findPath("start").textValue());
+        trip.setEndLocation(json.findPath("end").textValue());
         trip.save();
         return ok("Route Saved!");
     }

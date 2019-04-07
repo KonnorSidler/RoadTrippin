@@ -18,8 +18,11 @@ public class TripInfo extends Model {
 
     public static final Finder<Long, TripInfo> find = new Finder<>(TripInfo.class);
 
-    public TripInfo(String startLocation, String endLocation) {
+    public void setStartLocation(String startLocation) {
         this.startLocation = startLocation;
+    }
+
+    public void setEndLocation(String endLocation) {
         this.endLocation = endLocation;
     }
 
