@@ -11,7 +11,7 @@ In the Pipeline:
   <li>User persistence and user homepage</li>
   <li>Page of trips displayed by different filters (Highest rated, most traveled, etc)</li>
   <li>Redesign of generation page</li>
- <ul>
+ </ul>
    
  Sprint 2 Estimate: Story Points 4,7
 -	Route constraints
