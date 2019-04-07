@@ -1,0 +1,46 @@
+@*
+* This template takes a single argument, a String containing a
+* message to display.
+*@
+
+@(accountForm: Form[Account])
+
+@import helper._
+
+@*
+* Call the `main` template with two arguments. The first
+* argument is a `String` with the title of the page, the second
+* argument is an `Html` object containing the body of the page.
+*@
+@main("Account Settings") {
+
+    <head><b>Account Settings</b></head>
+    <body>
+        <b1>Create account</b1>
+        <form class="input-form" action="@routes.AccountController.createAccount()" method="post">
+            @CSRF.formField
+            <input type="text" name="name" id="account_name_input">
+            <input type="text" name="location" id="account_location_input">
+            <input type="submit" value="Create account">
+        </form>
+        <b1>Update account</b1>
+        <form class="input-form" action="@routes.AccountController.updateAccount()" method="put">
+            @CSRF.formField
+            <input type="text" name="id" id="id_input">
+            <input type="text" name="name" id="account_name_input">
+            <input type="text" name="location" id="account_location_input">
+            <input type="submit" value="Update account">
+        </form>
+        <b1>Get account</b1>
+        <form class="input-form" action="@routes.AccountController.getAccount()" method="get">
+            @CSRF.formField
+            <input type="text" name="id" id="id_input">
+            <input type="submit" value="Get account">
+        </form>
+        <b1>Get all accounts</b1>
+        <form class="input-form" action="@routes.AccountController.listAccounts()" method="get">
+            <input type="submit" value="Get all accounts">
+        </form>
+    </body>
+    <footer></footer>
+}

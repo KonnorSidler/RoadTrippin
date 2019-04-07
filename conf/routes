@@ -31,8 +31,8 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 POST    /trip/save                  controllers.HomeController.testLink(request: Request)
 
 +nocsrf
-GET     /user                       controllers.UserController.returnHome()
-GET     /user/find                  controllers.UserController.getUser(request: Request)
-PUT     /user                       controllers.UserController.updateUser(request: Request)
-POST    /user                       controllers.UserController.createUser(request: Request)
-GET     /user/all                   controllers.UserController.listUsers()
+GET     /account                       controllers.AccountController.returnHome()
+GET     /account/find                  controllers.AccountController.getAccount(request: Request)
+PUT     /account                       controllers.AccountController.updateAccount(request: Request)
+POST    /account                       controllers.AccountController.createAccount(request: Request)
+GET     /account/all                   controllers.AccountController.listAccounts()

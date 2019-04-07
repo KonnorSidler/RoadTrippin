@@ -1,7 +1,7 @@
 package controllers;
 
+import models.Account;
 import models.TripRating;
-import models.User;
 import play.mvc.*;
 import views.html.*;
 import models.TripInfo;
@@ -9,7 +9,7 @@ import play.data.FormFactory;
 import play.data.Form;
 import javax.inject.Inject;
 import java.util.List;
-import io.ebean.Model;
+
 import play.libs.Json;
 
 
@@ -28,11 +28,11 @@ public class HomeController extends Controller {
      * <code>GET</code> request with a path of <code>/</code>.
      */
     public Result index() {
-        Form<User> userForm = formFactory.form(User.class);
+        Form<Account> accountForm = formFactory.form(Account.class);
         Form<TripInfo> tripForm = formFactory.form(TripInfo.class);
         Form<TripRating> tripRating = formFactory.form(TripRating.class);
 
-        return ok(index.render(userForm, tripForm));
+        return ok(index.render(accountForm, tripForm));
     }
 
     public Result saveRouteInfo(Http.Request request) {
