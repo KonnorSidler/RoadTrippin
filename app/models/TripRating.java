@@ -18,8 +18,7 @@ public class TripRating extends Model {
     public static final Finder<Long, TripRating> find = new Finder<>(TripRating.class);
 
 
-    public TripRating(long tripRatingID, int tripRating, long tripID) {
-        this.tripRatingID = tripRatingID;
+    public TripRating(int tripRating, long tripID) {
         this.tripRating = tripRating;
         this.tripID = tripID;
     }

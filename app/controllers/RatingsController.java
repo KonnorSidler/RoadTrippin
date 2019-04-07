@@ -1,6 +1,6 @@
 package controllers;
 
-import models.User;
+import models.TripRating;
 import play.libs.Json;
 import play.data.Form;
 import play.data.FormFactory;
@@ -8,27 +8,23 @@ import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
 import views.html.userSettings;
-
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import javax.inject.Inject;
 import java.util.List;
 
 public class RatingsController extends Controller {
 
     public Result addRating(Http.Request request) {
-        return ok("Got it!" + request.body().asJson());
-        //TripRating rating = new TripRating(request.body.asJson().);
+        JsonNode json = request.body().asJson();
+        TripRating rating = new TripRating(Integer.parseInt(json.findPath("trip_rating").textValue()), Long.parseLong(json.findPath("trip_id").textValue()));
+        rating.save();
+        return ok("Rating saved!");
     }
 
-    /*
-    public Result createUser(Http.Request request){
-        Form<User> userForm = formFactory.form(User.class).bindFromRequest(request);
-        User user = userForm.get();
-        User newUser = new User();
-        newUser.setLocation(user.getLocation());
-        newUser.setId(System.currentTimeMillis());
-        newUser.setName(user.getName());
-        newUser.save();
-        return ok(userSettings.render(userForm));
+    public Result getRatings() {
+        List<TripRating> trips = TripRating.find.all();
+        return ok(Json.toJson(trips));
     }
-    */
+
 }

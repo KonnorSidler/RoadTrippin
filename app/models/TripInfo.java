@@ -33,5 +33,9 @@ public class TripInfo extends Model {
         return this.endLocation;
     }
 
+    public long getTripId() {
+        return this.tripId;
+    }
+
 
 }

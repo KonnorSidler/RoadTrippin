@@ -50,7 +50,7 @@ public class HomeController extends Controller {
         trip.setStartLocation(json.findPath("start").textValue());
         trip.setEndLocation(json.findPath("end").textValue());
         trip.save();
-        return ok("Route Saved!");
+        return ok(Long.toString(trip.getTripId()) + "n");
     }
 
 

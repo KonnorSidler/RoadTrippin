@@ -62,6 +62,7 @@
                     <br>
                     <br>
                     <button id="submitButton" onclick="plot()">Plot Route</button>
+                    <p id="routeID"></p>
                     <br>
                     <br>
 
@@ -113,6 +114,7 @@
 
                 var final_route = await calculateRoute(directionsService, directionsDisplay);
                 var x = document.getElementById("ratings");
+                var y =document.getElementById("routeID");
                 x.style.display = "block";
 
                 var data = JSON.stringify({"start" : final_route.request.origin.query,
@@ -131,8 +133,12 @@
                     error : function(data) {
                         console.log("Fail");
                         console.log(data);
+                        y.innerHTML = parseInt(data.responseText);
+                        y.style.display = "none";
                     }
                 });
+
+
 
 
             }
@@ -140,11 +146,13 @@
 
             function submitRating() {
                 var x  = document.getElementById("route_rating").value;
-                var data = JSON.stringify(x);
+                var y = document.getElementById("routeID").value;
+                var data = {"trip_rating" : x,
+                            "trip_id" : y};
                 $.ajax({
                     type : 'POST',
                     url : '@routes.RatingsController.addRating',
-                    data : data,
+                    data : JSON.stringify(data),
                     dataType: 'json',
                     contentType: 'application/json',
                     success : function(data) {
