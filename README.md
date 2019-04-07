@@ -11,4 +11,5 @@ In the Pipeline:
   <li>User persistence and homepage<li>
   <li>Page of trips displayed by different filters (Highest rated, most traveled, etc)<li>
   <li>Redesign of generation page<li>
+ <ul>
 
