@@ -43,7 +43,6 @@ public class HomeController extends Controller {
 
 
 
-
     public Result saveRouteInfo(Http.Request request) {
         JsonNode json = request.body().asJson();
         TripInfo trip = new TripInfo();
@@ -59,23 +58,6 @@ public class HomeController extends Controller {
         return ok(Json.toJson(trips));
     }
 
-
-
-
-
-
-
-
-
-
-
-
-    public Result saveTripRating(Http.Request request) {
-        Form<TripRating> tripRatingForm = formFactory.form(TripRating.class).bindFromRequest(request);
-        TripRating rating = tripRatingForm.get();
-        rating.save();
-        return redirect(routes.HomeController.index());
-    }
 
 
 

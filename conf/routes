@@ -41,5 +41,5 @@ GET     /user/all                   controllers.UserController.listUsers()
 
 # Rating routing
 +nocsrf
-POST    /rating/add                 controllers.RatingsController.addRating(request : Request)
+POST    /ratings/add                controllers.RatingsController.addRating(request : Request)
 GET     /ratings                    controllers.RatingsController.getRatings()

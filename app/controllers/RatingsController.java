@@ -17,7 +17,9 @@ public class RatingsController extends Controller {
 
     public Result addRating(Http.Request request) {
         JsonNode json = request.body().asJson();
-        TripRating rating = new TripRating(Integer.parseInt(json.findPath("trip_rating").textValue()), Long.parseLong(json.findPath("trip_id").textValue()));
+        TripRating rating = new TripRating();
+        rating.setTripRating(Integer.parseInt(json.findPath("trip_rating").textValue()));
+        rating.setTripId(Long.parseLong(json.findPath("trip_id").textValue()));
         rating.save();
         return ok("Rating saved!");
     }

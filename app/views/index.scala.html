@@ -146,7 +146,7 @@
 
             function submitRating() {
                 var x  = document.getElementById("route_rating").value;
-                var y = document.getElementById("routeID").value;
+                var y = document.getElementById("routeID").innerText;
                 var data = {"trip_rating" : x,
                             "trip_id" : y};
                 $.ajax({
