@@ -23,12 +23,12 @@ create table trip_rating (
   constraint pk_trip_rating primary key (trip_rating_id)
 );
 
-create table user (
+create table user_account (
   id                            bigserial not null,
   name                          varchar(255),
   location                      varchar(255),
   password                      varchar(255),
-  constraint pk_user primary key (id)
+  constraint pk_user_account primary key (id)
 );
 
 
@@ -40,5 +40,5 @@ drop table if exists trip_info cascade;
 
 drop table if exists trip_rating cascade;
 
-drop table if exists user cascade;
+drop table if exists user_account cascade;
 

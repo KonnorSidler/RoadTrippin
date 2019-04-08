@@ -1,7 +1,7 @@
 package controllers;
 
 import models.TripRating;
-import models.User;
+import models.UserAccount;
 import play.mvc.*;
 import views.html.*;
 import models.TripInfo;
@@ -31,7 +31,7 @@ public class HomeController extends Controller {
      * <code>GET</code> request with a path of <code>/</code>.
      */
     public Result index() {
-        Form<User> userForm = formFactory.form(User.class);
+        Form<UserAccount> userForm = formFactory.form(UserAccount.class);
         Form<TripInfo> tripForm = formFactory.form(TripInfo.class);
         Form<TripRating> tripRating = formFactory.form(TripRating.class);
 

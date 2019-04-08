@@ -3,7 +3,7 @@
 * message to display.
 *@
 
-@(userForm: Form[User])
+@(userForm: Form[UserAccount])
 
 @import helper._
 
@@ -17,14 +17,14 @@
     <head><b>User Settings</b></head>
     <body>
         <b1>Create user</b1>
-        <form class="input-form" action="@routes.UserController.createUser()" method="post">
+        <form class="input-form" action="@routes.UserAccountController.createUser()" method="post">
             @CSRF.formField
             <input type="text" name="name" id="user_name_input">
             <input type="text" name="location" id="user_location_input">
             <input type="submit" value="Create user">
         </form>
         <b1>Update user</b1>
-        <form class="input-form" action="@routes.UserController.updateUser()" method="put">
+        <form class="input-form" action="@routes.UserAccountController.updateUser()" method="put">
             @CSRF.formField
             <input type="text" name="id" id="id_input">
             <input type="text" name="name" id="user_name_input">
@@ -32,13 +32,13 @@
             <input type="submit" value="Update user">
         </form>
         <b1>Get user</b1>
-        <form class="input-form" action="@routes.UserController.getUser()" method="get">
+        <form class="input-form" action="@routes.UserAccountController.getUser()" method="get">
             @CSRF.formField
             <input type="text" name="id" id="id_input">
             <input type="submit" value="Get user">
         </form>
         <b1>Get all users</b1>
-        <form class="input-form" action="@routes.UserController.listUsers()" method="get">
+        <form class="input-form" action="@routes.UserAccountController.listUsers()" method="get">
             <input type="submit" value="Get all users">
         </form>
     </body>

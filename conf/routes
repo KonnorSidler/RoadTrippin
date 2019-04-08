@@ -32,13 +32,13 @@ POST    /trip/save                  controllers.HomeController.testLink(request:
 
 # User routing
 +nocsrf
-GET     /user                       controllers.UserController.returnHome()
-GET     /user/find                  controllers.UserController.getUser(request: Request)
+GET     /user                       controllers.UserAccountController.returnHome()
+GET     /user/find                  controllers.UserAccountController.getUser(request: Request)
 +nocsrf
-PUT     /user                       controllers.UserController.updateUser(request: Request)
+PUT     /user                       controllers.UserAccountController.updateUser(request: Request)
 +nocsrf
-POST    /user                       controllers.UserController.createUser(request: Request)
-GET     /user/all                   controllers.UserController.listUsers()
+POST    /user                       controllers.UserAccountController.createUser(request: Request)
+GET     /user/all                   controllers.UserAccountController.listUsers()
 
 
 # Rating routing
