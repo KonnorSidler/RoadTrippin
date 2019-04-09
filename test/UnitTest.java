@@ -51,4 +51,19 @@ public class UnitTest {
         }
     }
 
+    @Test
+    public void testOne() {
+
+    }
+
+    @Test
+    public void testTwo() {
+
+    }
+
+    @Test
+    public void testThree() {
+
+    }
+
 }

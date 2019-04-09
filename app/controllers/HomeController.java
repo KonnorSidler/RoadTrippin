@@ -35,7 +35,7 @@ public class HomeController extends Controller {
         Form<TripInfo> tripForm = formFactory.form(TripInfo.class);
         Form<TripRating> tripRating = formFactory.form(TripRating.class);
 
-        return ok(index.render(userForm, tripForm));
+        return ok(index.render());
     }
 
 
