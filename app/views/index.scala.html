@@ -34,10 +34,10 @@
 
             <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
             for="menu-lower-right">
-                <li class="mdl-menu__item" onclick="window.location.href = 'http://127.0.0.1:9000/';">Create trip</li>
-                <li class="mdl-menu__item" onclick="window.location.href = 'http://127.0.0.1:9000/trips';">View trips</li>
+                <li class="mdl-menu__item" onclick="window.location.href = '/';">Create trip</li>
+                <li class="mdl-menu__item" onclick="window.location.href = '/trips';">View trips</li>
                 <li disabled class="mdl-menu__item">Login... coming soon!</li>
-                <li class="mdl-menu__item" onclick="window.location.href = 'http://127.0.0.1:9000/user';">Users</li>
+                <li class="mdl-menu__item" onclick="window.location.href = '/user';">Users</li>
             </ul>
             <center>
                   <h1> Route Information </h1>
@@ -45,20 +45,18 @@
                     @CSRF.formField
                     <div class="mdl-textfield mdl-js-textfield">
                         <br>
-                        <input class="mdl-textfield__input" type="text" name="startLocation" id="start_input_form">
+                        <input class="mdl-textfield__input" maxlength="2048" type="text" name="startLocation" id="start_input_form">
                         <label class="mdl-textfield__label" for="start_input_form">Start location</label>
                         <br>
                         <br>
                         <br>
-                        <input class="mdl-textfield__input" type="text" name="endLocation" id="end_input_form">
+                        <input class="mdl-textfield__input" maxlength="1024" type="text" name="endLocation" id="end_input_form">
                         <label class="mdl-textfield__label" for="end_input_form">End location</label>
                         <br>
                         <br>
                     </div>
-
                     <h1> Number of Waypoints </h1>
                     <select name="stopCount" id="number_of_waypoints" required>
-
                       <option value="1"> 1 </option>
                       <option value="2"> 2 </option>
                       <option value="3"> 3 </option>
