@@ -40,23 +40,25 @@
                 <li class="mdl-menu__item" onclick="window.location.href = 'http://127.0.0.1:9000/user';">Users</li>
             </ul>
             <center>
-                  <h1> Route Information </h1>
+                  <h2 style="font-size: 20px"> Route Information </h2>
                   <form action="@routes.HomeController.saveRouteInfo()" method="post">
                     @CSRF.formField
                     <div class="mdl-textfield mdl-js-textfield">
                         <br>
+                        Start Location
                         <input class="mdl-textfield__input" type="text" name="startLocation" id="start_input_form">
-                        <label class="mdl-textfield__label" for="start_input_form">Start location</label>
+                        @*<label class="mdl-textfield__label" for="start_input_form">Start location</label>*@
                         <br>
                         <br>
                         <br>
+                        End Location
                         <input class="mdl-textfield__input" type="text" name="endLocation" id="end_input_form">
-                        <label class="mdl-textfield__label" for="end_input_form">End location</label>
+                        @*<label class="mdl-textfield__label" for="end_input_form">End location</label>*@
                         <br>
                         <br>
                     </div>
 
-                    <h1> Number of Waypoints </h1>
+                    <h2 style="font-size: 20px"> Number of Waypoints </h2>
                     <select name="stopCount" id="number_of_waypoints" required>
 
                       <option value="1"> 1 </option>
