@@ -10,6 +10,9 @@ import java.util.concurrent.CompletionStage;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.awaitility.Awaitility.await;
 import static play.test.Helpers.contentAsString;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
+
 
 /**
  * Unit testing does not require Play application start up.
@@ -52,13 +55,19 @@ public class UnitTest {
     }
 
     @Test
-    public void testOne() {
-
+    public void spyRoutes() {
+        final HomeController controller = new HomeController();
+        final HomeController  spyController = spy(controller);
+        Result result = spyController.getRoutes();
+        assertThat(result, is(not(nullValue())));
+        verify(spyController).getRoutes();
     }
 
     @Test
-    public void testTwo() {
-
+    public void testSetRating() {
+        final TripRating rating = new TripRating();
+        Result result = rating.setTripRating(4);
+        assertThat(rating.getRatings().contains(4));
     }
 
     @Test
