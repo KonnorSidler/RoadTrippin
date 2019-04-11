@@ -1,73 +1,55 @@
 @*
- * This template takes a single argument, a String containing a
- * message to display.
- *@
+* This template takes a single argument, a String containing a
+* message to display.
+*@
 
 @(userForm: Form[UserAccount], tripForm: Form[TripInfo])
 
-@import helper._
+    @import helper._
 
-@*
- * Call the `main` template with two arguments. The first
- * argument is a `String` with the title of the page, the second
- * argument is an `Html` object containing the body of the page.
- *@
-@main("RoadTrippin'") {
-
-    <head>
-        <meta name = "viewport" content = "width = device-width, initial-scale = 1">
-        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-blue.min.css" />
-        <script src = "https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>
-        <link rel = "stylesheet" href = "https://fonts.googleapis.com/icon?family=Material+Icons">
-    </head>
-
-    <div id="main">
+    @*
+    * Call the `main` template with two arguments. The first
+    * argument is a `String` with the title of the page, the second
+    * argument is an `Html` object containing the body of the page.
+    *@
+    @main("Welcome to Play") {
 
 
-        <div id="map"></div>
 
-        <div id="side_bar">
-            <button id="menu-lower-right"
-            class="mdl-button mdl-js-button mdl-button--icon">
-                <i class="material-icons">more_vert</i>
-            </button>
 
-            <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
-            for="menu-lower-right">
-                <li class="mdl-menu__item" onclick="window.location.href = '/';">Create trip</li>
-                <li class="mdl-menu__item" onclick="window.location.href = '/trips';">View trips</li>
-                <li disabled class="mdl-menu__item">Login... coming soon!</li>
-                <li class="mdl-menu__item" onclick="window.location.href = '/user';">Users</li>
-            </ul>
-            <center>
-                  <h2 style="font-size: 20px"> Route Information </h2>
-                  <form action="@routes.HomeController.saveRouteInfo()" method="post">
-                    @CSRF.formField
-                    <div class="mdl-textfield mdl-js-textfield">
-                        <br>
-                        Start Location
-                        <input class="mdl-textfield__input" type="text" name="startLocation" id="start_input_form">
-                        @*<label class="mdl-textfield__label" for="start_input_form">Start location</label>*@
+        <script type='text/javascript' src='@routes.Assets.versioned("javascripts/index.js")'></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+        <div id="main">
+
+
+            <div id="map"></div>
+
+            <div id="side_bar">
+                <center>
+                    <h1> Route Information </h1>
+                    <form action="@routes.HomeController.saveRouteInfo()" method="post">
+                        @CSRF.formField
+                        Start Location: <br>
+                        <input type="text" name="startLocation" id="start_input_form">
                         <br>
                         <br>
-                        <br>
-                        End Location
-                        <input class="mdl-textfield__input" type="text" name="endLocation" id="end_input_form">
-                        @*<label class="mdl-textfield__label" for="end_input_form">End location</label>*@
+                        End Location: <br>
+                        <input type="text" name="endLocation" id="end_input_form">
                         <br>
                         <br>
-                    </div>
+                        <h1> Number of Waypoints </h1>
+                        <select name="stopCount" id="number_of_waypoints" required>
 
-                    <h2 style="font-size: 20px"> Number of Waypoints </h2>
-                    <select name="stopCount" id="number_of_waypoints" required>
-                      <option value="1"> 1 </option>
-                      <option value="2"> 2 </option>
-                      <option value="3"> 3 </option>
-                      <option value="4"> 4 </option>
-                      <option value="5"> 5 </option>
-                    </select>
-                    <br>
-                  </form>
+                            <option value="1"> 1 </option>
+                            <option value="2"> 2 </option>
+                            <option value="3"> 3 </option>
+                            <option value="4"> 4 </option>
+                            <option value="5"> 5 </option>
+                        </select>
+                        <br>
+                    </form>
 
 
                     <br>
@@ -79,126 +61,120 @@
                     </select>
                     <br>
                     <br>
-                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="submitButton" onclick="plot()">
-                        <span class="mdc-button__label">Plot Route</span>
-                    </button>
+                    <button id="submitButton" onclick="plot()">Plot Route</button>
                     <p id="routeID"></p>
                     <br>
                     <br>
 
 
 
-                <div id="ratings">
+                    <div id="ratings">
                         <br>
 
-                    <button id="rating_submit" onclick="submitRating()">Rate</button>
-                    <select id="route_rating">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                </div>
-            </center>
+                        <button id="rating_submit" onclick="submitRating()">Rate</button>
+                        <select id="route_rating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                </center>
+            </div>
         </div>
-    </div>
-
-
-    <script>
-        document.querySelector('#submitButton').addEventListener('mdl-componentupgraded', function() {
-            this.MaterialProgress.setProgress(44);
-        });
-    </script>
-
-
-    <script>
-            //Initilizes the map and sets up routing services.
-            var map;
-            var directionsService;
-            var directionsDisplay;
-            var service;
-            function initMap() {
-                map = new google.maps.Map(document.getElementById('map'), {
-                    center: {lat: 39.0119, lng: -98.4842},
-                    zoom: 5
-                });
-
-                service = new google.maps.places.PlacesService(map);
-
-                directionsService = new google.maps.DirectionsService();
-                directionsDisplay = new google.maps.DirectionsRenderer();
-                directionsDisplay.setMap(map);
-            }
-    </script>
-
-    <script>
-
-            async function plot() {
-
-                var final_route = await calculateRoute(directionsService, directionsDisplay);
-                var x = document.getElementById("ratings");
-                var y =document.getElementById("routeID");
-                x.style.display = "block";
-
-                var data = JSON.stringify({"start" : final_route.request.origin.query,
-                                            "end" : final_route.request.destination.query,
-                                            "waypoints" : final_route.request.waypoints});
-                $.ajax({
-                    type : 'POST',
-                    url : '@routes.HomeController.saveRouteInfo',
-                    data : data,
-                    dataType: 'json',
-                    contentType: 'application/json',
-                    success : function(data) {
-                        console.log("Success");
-                        console.log(data);
-                    },
-                    error : function(data) {
-                        console.log("Fail");
-                        console.log(data);
-                        y.innerHTML = parseInt(data.responseText);
-                        y.style.display = "none";
-                    }
-                });
 
 
 
 
-            }
+
+        <script>
+                //Initilizes the map and sets up routing services.
+                var map;
+                var directionsService;
+                var directionsDisplay;
+                var service;
+                function initMap() {
+                    map = new google.maps.Map(document.getElementById('map'), {
+                        center: {lat: 39.0119, lng: -98.4842},
+                        zoom: 5
+                    });
+
+                    service = new google.maps.places.PlacesService(map);
+
+                    directionsService = new google.maps.DirectionsService();
+                    directionsDisplay = new google.maps.DirectionsRenderer();
+                    directionsDisplay.setMap(map);
+                }
+        </script>
+
+        <script>
+
+                async function plot() {
+
+                    var final_route = await calculateRoute(directionsService, directionsDisplay);
+                    var x = document.getElementById("ratings");
+                    var y =document.getElementById("routeID");
+                    x.style.display = "block";
+
+                    var data = JSON.stringify({"start" : final_route.request.origin.query,
+                        "end" : final_route.request.destination.query,
+                        "waypoints" : final_route.request.waypoints});
+                    $.ajax({
+                        type : 'POST',
+                        url : '@routes.HomeController.saveRouteInfo',
+                        data : data,
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        success : function(data) {
+                            console.log("Success");
+                            console.log(data);
+                        },
+                        error : function(data) {
+                            console.log("Fail");
+                            console.log(data);
+                            y.innerHTML = parseInt(data.responseText);
+                            y.style.display = "none";
+                        }
+                    });
 
 
-            function submitRating() {
-                var x  = document.getElementById("route_rating").value;
-                var y = document.getElementById("routeID").innerText;
-                var data = {"trip_rating" : x,
-                            "trip_id" : y};
-                $.ajax({
-                    type : 'POST',
-                    url : '@routes.RatingsController.addRating',
-                    data : JSON.stringify(data),
-                    dataType: 'json',
-                    contentType: 'application/json',
-                    success : function(data) {
-                        console.log("Success");
-                        console.log(data);
-                    },
-                    error : function(data) {
-                        console.log("Fail");
-                        console.log(data);
-                    }
-                });
-
-            }
-    </script>
 
 
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYZdCpCHLlMxV_gdqMUV-4c6t9iFhLaxM&libraries=places&callback=initMap"
-    type="text/javascript"></script>
-
-    <script type='text/javascript' src='@routes.Assets.versioned("javascripts/main.js")'></script>
+                }
 
 
+                function submitRating() {
+                    var x  = document.getElementById("route_rating").value;
+                    var y = document.getElementById("routeID").innerText;
+                    var data = {"trip_rating" : x,
+                        "trip_id" : y};
+                    $.ajax({
+                        type : 'POST',
+                        url : '@routes.RatingsController.addRating',
+                        data : JSON.stringify(data),
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        success : function(data) {
+                            console.log("Success");
+                            console.log(data);
+                        },
+                        error : function(data) {
+                            console.log("Fail");
+                            console.log(data);
+                        }
+                    });
+
+                }
+        </script>
 
 
-}
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYZdCpCHLlMxV_gdqMUV-4c6t9iFhLaxM&libraries=places&callback=initMap"
+        type="text/javascript"></script>
+
+        <script type='text/javascript' src='@routes.Assets.versioned("javascripts/main.js")'></script>
+
+
+
+
+    }
