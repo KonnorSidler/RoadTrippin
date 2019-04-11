@@ -28,6 +28,8 @@ libraryDependencies += "org.postgresql" % "postgresql" % "9.4-1201-jdbc41"
 // Testing libraries for dealing with CompletionStage...
 libraryDependencies += "org.assertj" % "assertj-core" % "3.11.1" % Test
 libraryDependencies += "org.awaitility" % "awaitility" % "3.1.3" % Test
+libraryDependencies += "org.mockito" % "mockito-core" % "2.7.19" % Test
+
 
 
 

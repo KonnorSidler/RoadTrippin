@@ -1,6 +1,6 @@
 package controllers;
 
-import models.TripRating;
+import models.*;
 import play.libs.Json;
 import play.data.Form;
 import play.data.FormFactory;

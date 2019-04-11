@@ -1,6 +1,9 @@
 import akka.actor.ActorSystem;
 import controllers.AsyncController;
 import controllers.CountController;
+import controllers.*;
+import models.*;
+import models.UserAccount;
 import org.junit.Test;
 import play.mvc.Result;
 import scala.concurrent.ExecutionContextExecutor;
@@ -59,19 +62,26 @@ public class UnitTest {
         final HomeController controller = new HomeController();
         final HomeController  spyController = spy(controller);
         Result result = spyController.getRoutes();
-        assertThat(result, is(not(nullValue())));
+        assertThat(result);
         verify(spyController).getRoutes();
     }
 
     @Test
-    public void testSetRating() {
-        final TripRating rating = new TripRating();
-        Result result = rating.setTripRating(4);
-        assertThat(rating.getRatings().contains(4));
+    public void spySetRating() {
+        final RatingsController controller = new RatingsController();
+        final RatingsController  spyController = spy(controller);
+        Result result = spyController.getRatings();
+        assertThat(result);
+        verify(spyController).getRatings();
     }
 
     @Test
     public void testThree() {
+        final UserAccountController controller = new UserAccountController();
+        final UserAccountController  spyController = spy(controller);
+        Result result = spyController.listUsers();
+        assertThat(result);
+        verify(spyController).listUsers();
 
     }
 

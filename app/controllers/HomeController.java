@@ -1,10 +1,10 @@
 package controllers;
 
-import models.TripRating;
+import models.*;
 import models.UserAccount;
 import play.mvc.*;
 import views.html.*;
-import models.TripInfo;
+//import models.TripInfo;
 import play.data.FormFactory;
 import play.data.Form;
 import javax.inject.Inject;
