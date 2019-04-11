@@ -47,11 +47,18 @@ public class UserAccountController extends Controller {
     public Result createUser(Http.Request request){
         Form<UserAccount> userForm = formFactory.form(UserAccount.class).bindFromRequest(request);
         UserAccount user = userForm.get();
-        UserAccount newUser = new UserAccount();
+        UserAccount newUser = new UserAccount(1L,"","","");
         newUser.setLocation(user.getLocation());
         newUser.setId(System.currentTimeMillis());
         newUser.setName(user.getName());
         newUser.save();
         return ok(userSettings.render(userForm));
+    }
+
+    public Result getResultWithString(String response) {
+
+        StringBuilder sb = new StringBuilder(response);
+
+        return ok("success");
     }
 }

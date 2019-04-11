@@ -1,15 +1,18 @@
 import akka.actor.ActorSystem;
 import controllers.AsyncController;
 import controllers.CountController;
+import controllers.UserAccountController;
+import models.UserAccount;
 import org.junit.Test;
 import play.mvc.Result;
 import scala.concurrent.ExecutionContextExecutor;
 
 import java.util.concurrent.CompletionStage;
-
+import static junit.framework.TestCase.assertEquals;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.awaitility.Awaitility.await;
-import static play.test.Helpers.contentAsString;
+import static play.test.Helpers.*;
+import static org.mockito.Mockito.*;
 
 /**
  * Unit testing does not require Play application start up.
@@ -17,6 +20,32 @@ import static play.test.Helpers.contentAsString;
  * https://www.playframework.com/documentation/latest/JavaTest
  */
 public class UnitTest {
+
+    @Test
+    public void getUsersWithSpy() {
+        UserAccountController userAccountController = new UserAccountController();
+        UserAccountController spyAccountController = spy(userAccountController);
+        Result result = spyAccountController.getResultWithString("found json");
+        doReturn(result).when(spyAccountController).listUsers();
+        assertThat(contentAsString(spyAccountController.listUsers()).contains("found json"));
+    }
+
+    @Test
+    public void testCreateUser() {
+        UserAccount userAccount = new UserAccount(1L, "Niko", "State College", "password");
+        assertEquals(1L, userAccount.getId());
+        assertEquals("Niko", userAccount.getName());
+        assertEquals("State College", userAccount.getLocation());
+        assertEquals("password", userAccount.getPassword());
+    }
+
+    @Test
+    public void testIdCreation(){
+        UserAccount userAccount = new UserAccount(1L, "test", "test", "test");
+        Long randomId = userAccount.createId();
+        userAccount.setId(randomId);
+        assertThat(randomId).isEqualTo(userAccount.getId());
+    }
 
     @Test
     public void simpleCheck() {

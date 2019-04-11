@@ -21,14 +21,17 @@
         <link rel = "stylesheet" href = "https://fonts.googleapis.com/icon?family=Material+Icons">
     </head>
     <body>
-        <b1>Create user</b1>
-        <form class="input-form" action="@routes.UserAccountController.createUser()" method="post">
-            @CSRF.formField
-            <input type="text" name="name" id="user_name_input">
-            <input type="text" name="location" id="user_location_input">
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-            type="submit" value="Create user">Create User</button>
-        </form>
+        <div>
+            <b1>Create user</b1>
+            <form class="input-form" action="@routes.UserAccountController.createUser()" method="post">
+                @CSRF.formField
+                <input type="text" name="name" id="user_name_input">
+                <input type="text" name="location" id="user_location_input">
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                type="submit" value="Create user">Create User</button>
+            </form>
+        </div>
+
         <b1>Update user</b1>
         <form class="input-form" action="@routes.UserAccountController.updateUser()" method="put">
             @CSRF.formField

@@ -4,6 +4,7 @@ import play.test.Helpers;
 import play.test.TestBrowser;
 import play.test.WithBrowser;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static play.test.Helpers.*;
 
@@ -23,8 +24,8 @@ public class BrowserTest extends WithBrowser {
      */
     @Test
     public void test() {
-        browser.goTo("http://localhost:" + play.api.test.Helpers.testServerPort());
-        assertTrue(browser.pageSource().contains("Your new application is ready."));
+        browser.goTo("http://localhost:" + play.api.test.Helpers.testServerPort() + "/user");
+        assertTrue(browser.pageSource().contains("User settings"));
     }
 
 }

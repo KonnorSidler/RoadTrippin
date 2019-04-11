@@ -38,11 +38,6 @@ public class HomeController extends Controller {
         return ok(index.render(userForm, tripForm));
     }
 
-
-
-
-
-
     public Result saveRouteInfo(Http.Request request) {
         JsonNode json = request.body().asJson();
         TripInfo trip = new TripInfo();

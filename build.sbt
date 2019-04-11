@@ -29,7 +29,10 @@ libraryDependencies += "org.postgresql" % "postgresql" % "9.4-1201-jdbc41"
 libraryDependencies += "org.assertj" % "assertj-core" % "3.11.1" % Test
 libraryDependencies += "org.awaitility" % "awaitility" % "3.1.3" % Test
 
-
+libraryDependencies ++= Seq (
+  "org.scalatest" %% "scalatest" % "3.0.1" % "test",
+  "org.mockito" % "mockito-core" % "2.8.47" % "test"
+)
 
 // Make verbose tests
 testOptions in Test := Seq(Tests.Argument(TestFrameworks.JUnit, "-a", "-v"))
