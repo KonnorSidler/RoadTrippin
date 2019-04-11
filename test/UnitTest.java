@@ -76,7 +76,7 @@ public class UnitTest {
     }
 
     @Test
-    public void testThree() {
+    public void spyListUsers() {
         final UserAccountController controller = new UserAccountController();
         final UserAccountController  spyController = spy(controller);
         Result result = spyController.listUsers();
