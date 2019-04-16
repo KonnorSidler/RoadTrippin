@@ -12,13 +12,13 @@
  * argument is a `String` with the title of the page, the second
  * argument is an `Html` object containing the body of the page.
  *@
-@main("Welcome to Play") {
+@main("Database Testing Form") {
 
   <form action="@routes.DatabaseTestController.saveDatabaseTest()" method="post">
     @CSRF.formField
     Test String <br>
     <input type="text" name="databaseMessage">
     <input type="submit" value="Submit">
-    </form> 
+    </form>
 
 }
