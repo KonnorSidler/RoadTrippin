@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class TripRating extends Model {
 
     @Id
-    private long tripRatingID;
+    private long ratingID;
 
     private int tripRating;
     private long tripId;
@@ -30,7 +30,7 @@ public class TripRating extends Model {
         return this.tripRating;
     }
 
-    public long getTripRatingId() {
+    public long getTripId() {
         return this.tripId;
     }
 

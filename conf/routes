@@ -4,6 +4,8 @@
 
 # An example controller showing a sample home page
 GET     /                           controllers.HomeController.index
+
+GET     /tripcreate                           controllers.HomeController.tripcreation
 # An example controller showing how to use dependency injection
 GET     /count                      controllers.CountController.count
 # An example controller showing how to write asynchronous code
@@ -25,9 +27,6 @@ GET     /viewDBTest                 controllers.DatabaseTestController.getDBTest
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
 
-# Test for sending route info, will be removed
-+nocsrf
-POST    /trip/save                  controllers.HomeController.testLink(request: Request)
 
 
 # User routing

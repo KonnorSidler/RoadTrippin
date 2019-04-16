@@ -17,10 +17,10 @@ create table trip_info (
 );
 
 create table trip_rating (
-  trip_rating_id                bigserial not null,
+  rating_id                     bigserial not null,
   trip_rating                   integer not null,
   trip_id                       bigint not null,
-  constraint pk_trip_rating primary key (trip_rating_id)
+  constraint pk_trip_rating primary key (rating_id)
 );
 
 create table user_account (

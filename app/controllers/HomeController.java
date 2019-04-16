@@ -31,12 +31,22 @@ public class HomeController extends Controller {
      * <code>GET</code> request with a path of <code>/</code>.
      */
     public Result index() {
+
+
+        return ok(views.html.homepage.render());
+    }
+
+
+
+    public Result tripcreation() {
         Form<UserAccount> userForm = formFactory.form(UserAccount.class);
         Form<TripInfo> tripForm = formFactory.form(TripInfo.class);
         Form<TripRating> tripRating = formFactory.form(TripRating.class);
 
         return ok(index.render(userForm, tripForm));
     }
+
+
 
 
 

@@ -25,8 +25,10 @@ public class RatingsController extends Controller {
     }
 
     public Result getRatings() {
-        List<TripRating> trips = TripRating.find.all();
-        return ok(Json.toJson(trips));
+        List<TripRating> ratings = TripRating.find.all();
+        return ok(Json.toJson(ratings));
     }
+
+
 
 }
