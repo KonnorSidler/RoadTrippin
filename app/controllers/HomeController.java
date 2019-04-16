@@ -39,11 +39,8 @@ public class HomeController extends Controller {
 
 
     public Result tripcreation() {
-        Form<UserAccount> userForm = formFactory.form(UserAccount.class);
-        Form<TripInfo> tripForm = formFactory.form(TripInfo.class);
-        Form<TripRating> tripRating = formFactory.form(TripRating.class);
 
-        return ok(index.render(userForm, tripForm));
+        return ok(index.render());
     }
 
 
@@ -77,6 +74,6 @@ public class HomeController extends Controller {
 
     }
 
-    
+
 
 }

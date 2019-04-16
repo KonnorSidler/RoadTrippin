@@ -25,6 +25,10 @@ public class TripRating extends Model {
         this.tripId = tripId;
     }
 
+    public long getRatingID() {
+      return this.ratingID;
+    }
+
 
     public int getTripRating() {
         return this.tripRating;
