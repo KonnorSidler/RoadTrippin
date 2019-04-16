@@ -75,15 +75,13 @@ header .highlight, header .current a {
 }
 
 #options{
-  height: 1000px;
   width: 100%;
   z-index: -1;
-  position: fixed;
-  margin-top: 685px;
+  padding-top: 685px;
 }
 
 #side_bar{
-  overflow-y: auto;
+  overflow-y: scroll;
 }
 
 #showcase{
