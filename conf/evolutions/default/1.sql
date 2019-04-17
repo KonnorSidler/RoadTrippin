@@ -20,7 +20,9 @@ create table trip_rating (
   rating_id                     bigserial not null,
   trip_rating                   integer not null,
   trip_id                       bigint not null,
-  constraint pk_trip_rating primary key (rating_id)
+  constraint pk_trip_rating primary key (rating_id),
+  constraint fk_trip_id foreign key (trip_id)
+  references trip_info (trip_id)
 );
 
 create table user_account (
@@ -41,4 +43,3 @@ drop table if exists trip_info cascade;
 drop table if exists trip_rating cascade;
 
 drop table if exists user_account cascade;
-
