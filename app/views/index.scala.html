@@ -135,12 +135,57 @@
 
                 var final_route = await calculateRoute(directionsService, directionsDisplay);
                 var x = document.getElementById("ratings");
-                var y =document.getElementById("routeID");
+                var y = document.getElementById("routeID");
+                var z = document.getElementById("number_of_waypoints").value;
                 x.style.display = "block";
 
-                var data = JSON.stringify({"start" : final_route.request.origin.query,
-                                            "end" : final_route.request.destination.query,
-                                            "waypoints" : final_route.request.waypoints});
+                var data;
+                if(z == 1) {
+                    data = JSON.stringify({"start" : final_route.request.origin.query,
+                        "end" : final_route.request.destination.query,
+                        "waypointOne" : final_route.routes[0].legs[0].end_address,
+                        "waypointTwo" : "null",
+                        "waypointThree" : "null",
+                        "waypointFour" : "null",
+                        "waypointFive" : "null"});
+                }
+                if(z == 2) {
+                    data = JSON.stringify({"start" : final_route.request.origin.query,
+                        "end" : final_route.request.destination.query,
+                        "waypointOne" : final_route.routes[0].legs[0].end_address,
+                        "waypointTwo" : final_route.routes[0].legs[1].end_address,
+                        "waypointThree" : "null",
+                        "waypointFour" : "null",
+                        "waypointFive" : "null"});
+                }
+                if(z == 3) {
+                    data = JSON.stringify({"start" : final_route.request.origin.query,
+                        "end" : final_route.request.destination.query,
+                        "waypointOne" : final_route.routes[0].legs[0].end_address,
+                        "waypointTwo" : final_route.routes[0].legs[1].end_address,
+                        "waypointThree" : final_route.routes[0].legs[2].end_address,
+                        "waypointFour" : "null",
+                        "waypointFive" : "null"});
+                }
+                if(z == 4) {
+                    data = JSON.stringify({"start" : final_route.request.origin.query,
+                        "end" : final_route.request.destination.query,
+                        "waypointOne" : final_route.routes[0].legs[0].end_address,
+                        "waypointTwo" : final_route.routes[0].legs[1].end_address,
+                        "waypointThree" : final_route.routes[0].legs[2].end_address,
+                        "waypointFour" : final_route.routes[0].legs[3].end_address,
+                        "waypointFive" : "null"});
+                }
+                if(z == 5) {
+                    data = JSON.stringify({"start" : final_route.request.origin.query,
+                        "end" : final_route.request.destination.query,
+                        "waypointOne" : final_route.routes[0].legs[0].end_address,
+                        "waypointTwo" : final_route.routes[0].legs[1].end_address,
+                        "waypointThree" : final_route.routes[0].legs[2].end_address,
+                        "waypointFour" : final_route.routes[0].legs[3].end_address,
+                        "waypointFive" : final_route.routes[0].legs[4].end_address});
+                }
+
                 $.ajax({
                     type : 'POST',
                     url : '@routes.HomeController.saveRouteInfo',

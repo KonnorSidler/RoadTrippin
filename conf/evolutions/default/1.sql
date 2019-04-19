@@ -13,6 +13,11 @@ create table trip_info (
   trip_id                       bigserial not null,
   start_location                varchar(255),
   end_location                  varchar(255),
+  waypoint_one                  varchar(255),
+  waypoint_two                  varchar(255),
+  waypoint_three                varchar(255),
+  waypoint_four                 varchar(255),
+  waypoint_five                 varchar(255),
   constraint pk_trip_info primary key (trip_id)
 );
 
