@@ -40,6 +40,7 @@ public class HomeController extends Controller {
 
     public Result tripcreation() {
 
+
         return ok(index.render());
     }
 
