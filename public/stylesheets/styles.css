@@ -33,6 +33,16 @@ header a {
   font-size: 15px;
 }
 
+a.button {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    color: initial;
+    padding: 3px;
+}
+
 header ul{
   margin: 0;
   padding: 0;
