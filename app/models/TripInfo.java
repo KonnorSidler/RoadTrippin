@@ -15,6 +15,12 @@ public class TripInfo extends Model {
 
     private String endLocation;
 
+    private String waypointOne;
+    private String waypointTwo;
+    private String waypointThree;
+    private String waypointFour;
+    private String waypointFive;
+
 
     public static final Finder<Long, TripInfo> find = new Finder<>(TripInfo.class);
 
@@ -37,5 +43,43 @@ public class TripInfo extends Model {
         return this.tripId;
     }
 
+    public String getWaypointOne() {
+        return waypointOne;
+    }
 
+    public void setWaypointOne(String waypointOne) {
+        this.waypointOne = waypointOne;
+    }
+
+    public String getWaypointTwo() {
+        return waypointTwo;
+    }
+
+    public void setWaypointTwo(String waypointTwo) {
+        this.waypointTwo = waypointTwo;
+    }
+
+    public String getWaypointThree() {
+        return waypointThree;
+    }
+
+    public void setWaypointThree(String waypointThree) {
+        this.waypointThree = waypointThree;
+    }
+
+    public String getWaypointFour() {
+        return waypointFour;
+    }
+
+    public void setWaypointFour(String waypointFour) {
+        this.waypointFour = waypointFour;
+    }
+
+    public String getWaypointFive() {
+        return waypointFive;
+    }
+
+    public void setWaypointFive(String waypointFive) {
+        this.waypointFive = waypointFive;
+    }
 }

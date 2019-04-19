@@ -55,6 +55,11 @@ public class HomeController extends Controller {
         TripInfo trip = new TripInfo();
         trip.setStartLocation(json.findPath("start").textValue());
         trip.setEndLocation(json.findPath("end").textValue());
+        trip.setWaypointOne(json.findPath("waypointOne").textValue());
+        trip.setWaypointTwo(json.findPath("waypointTwo").textValue());
+        trip.setWaypointThree(json.findPath("waypointThree").textValue());
+        trip.setWaypointFour(json.findPath("waypointFour").textValue());
+        trip.setWaypointFive(json.findPath("waypointFive").textValue());
         trip.save();
         return ok(Long.toString(trip.getTripId()) + "n");
     }
