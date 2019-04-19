@@ -71,14 +71,13 @@ public class HomeController extends Controller {
 
 
     public Result getRoute(Long routeID) {
-      TripInfo trip = TripInfo.find.byId(routeID);
       return ok(createdTrip.render(routeID));
     }
 
     public Result getRouteFromDB(Http.Request request) {
         JsonNode json = request.body().asJson();
-        long routeID = json.findPath("route").longValue();
-        TripInfo trip = TripInfo.find.byId(routeID);
+        String routeID = json.findPath("route").textValue();
+        //TripInfo trip = TripInfo.find.byId(routeID);
         return ok("loaded");
     }
 

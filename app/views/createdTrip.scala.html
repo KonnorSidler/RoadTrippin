@@ -97,12 +97,12 @@
 
                 $(document).ready(function(){
                     console.log("Running")
-                    var x = document.getElementById("route_id").value;
-                    var data = JSON.stringify({"route" : x});
+                    var x = document.getElementById("route_id").innerText;
+                    var data = {"route" : x};
                     $.ajax({
                         type : 'GET',
                         url : '@routes.HomeController.getRouteFromDB',
-                        data : data,
+                        data : JSON.stringify(data),
                         dataType: 'json',
                         contentType: 'application/json',
                         success : function(data) {
