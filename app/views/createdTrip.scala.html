@@ -1,0 +1,208 @@
+@*
+ * This template takes a single argument, a String containing a
+ * message to display.
+ *@
+
+@(PlotRouteId: Integer)
+
+@import helper._
+
+@*
+ * Call the `main` template with two arguments. The first
+ * argument is a `String` with the title of the page, the second
+ * argument is an `Html` object containing the body of the page.
+ *@
+@main("Create Trip") {
+
+
+
+
+  <script type='text/javascript' src='@routes.Assets.versioned("javascripts/index.js")'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h2>Road Trippin'</h2>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/tripcreate">Create Trip</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="/user">Log In</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="mapsection">
+        <div id="map"></div>
+    </section>
+
+    <section id="options">
+        <div id="side_bar">
+            <center>
+              This trip ID is :
+              <p id="routeID">@PlotRouteId</p>
+                <div id="ratings">
+                    <br>
+
+                    <button id="rating_submit" onclick="submitRating()">Rate</button>
+                    <select id="route_rating">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+            </center>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+    <script>
+            //Initializes the map and sets up routing services.
+            var map;
+            var directionsService;
+            var directionsDisplay;
+            var service;
+            function initMap() {
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: {lat: 39.0119, lng: -98.4842},
+                    zoom: 5
+                });
+
+                service = new google.maps.places.PlacesService(map);
+
+                directionsService = new google.maps.DirectionsService();
+                directionsDisplay = new google.maps.DirectionsRenderer();
+                directionsDisplay.setMap(map);
+            }
+    </script>
+
+    <script>
+
+            async function plot() {
+
+                var final_route = await calculateRoute(directionsService, directionsDisplay);
+                var x = document.getElementById("ratings");
+                var y = document.getElementById("routeID");
+                var z = document.getElementById("number_of_waypoints").value;
+                x.style.display = "block";
+
+                var data;
+                if(z == 1) {
+                    data = JSON.stringify({"start" : final_route.request.origin.query,
+                        "end" : final_route.request.destination.query,
+                        "waypointOne" : final_route.routes[0].legs[0].end_address,
+                        "waypointTwo" : "null",
+                        "waypointThree" : "null",
+                        "waypointFour" : "null",
+                        "waypointFive" : "null"});
+                }
+                if(z == 2) {
+                    data = JSON.stringify({"start" : final_route.request.origin.query,
+                        "end" : final_route.request.destination.query,
+                        "waypointOne" : final_route.routes[0].legs[0].end_address,
+                        "waypointTwo" : final_route.routes[0].legs[1].end_address,
+                        "waypointThree" : "null",
+                        "waypointFour" : "null",
+                        "waypointFive" : "null"});
+                }
+                if(z == 3) {
+                    data = JSON.stringify({"start" : final_route.request.origin.query,
+                        "end" : final_route.request.destination.query,
+                        "waypointOne" : final_route.routes[0].legs[0].end_address,
+                        "waypointTwo" : final_route.routes[0].legs[1].end_address,
+                        "waypointThree" : final_route.routes[0].legs[2].end_address,
+                        "waypointFour" : "null",
+                        "waypointFive" : "null"});
+                }
+                if(z == 4) {
+                    data = JSON.stringify({"start" : final_route.request.origin.query,
+                        "end" : final_route.request.destination.query,
+                        "waypointOne" : final_route.routes[0].legs[0].end_address,
+                        "waypointTwo" : final_route.routes[0].legs[1].end_address,
+                        "waypointThree" : final_route.routes[0].legs[2].end_address,
+                        "waypointFour" : final_route.routes[0].legs[3].end_address,
+                        "waypointFive" : "null"});
+                }
+                if(z == 5) {
+                    data = JSON.stringify({"start" : final_route.request.origin.query,
+                        "end" : final_route.request.destination.query,
+                        "waypointOne" : final_route.routes[0].legs[0].end_address,
+                        "waypointTwo" : final_route.routes[0].legs[1].end_address,
+                        "waypointThree" : final_route.routes[0].legs[2].end_address,
+                        "waypointFour" : final_route.routes[0].legs[3].end_address,
+                        "waypointFive" : final_route.routes[0].legs[4].end_address});
+                }
+
+                $.ajax({
+                    type : 'POST',
+                    url : '@routes.HomeController.saveRouteInfo',
+                    data : data,
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    success : function(data) {
+                        console.log("Success");
+                        console.log(data);
+                    },
+                    error : function(data) {
+                        console.log("Fail");
+                        console.log(data);
+                        y.innerHTML = parseInt(data.responseText);
+                        y.style.display = "none";
+                    }
+                });
+
+
+
+
+            }
+
+
+            function submitRating() {
+                var x  = document.getElementById("route_rating").value;
+                var y = document.getElementById("routeID").innerText;
+                var data = {"trip_rating" : x,
+                            "trip_id" : y};
+                $.ajax({
+                    type : 'POST',
+                    url : '@routes.RatingsController.addRating',
+                    data : JSON.stringify(data),
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    success : function(data) {
+                        console.log("Success");
+                        console.log(data);
+                    },
+                    error : function(data) {
+                        console.log("Fail");
+                        console.log(data);
+                    }
+                });
+
+            }
+    </script>
+
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYZdCpCHLlMxV_gdqMUV-4c6t9iFhLaxM&libraries=places&callback=initMap"
+    type="text/javascript"></script>
+
+    <script type='text/javascript' src='@routes.Assets.versioned("javascripts/main.js")'></script>
+
+
+
+
+}
