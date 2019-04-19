@@ -3,7 +3,7 @@
  * message to display.
  *@
 
-@(PlotRouteId: Integer)
+@(routeID: Long)
 
 @import helper._
 
@@ -44,8 +44,6 @@
     <section id="options">
         <div id="side_bar">
             <center>
-              This trip ID is :
-              <p id="routeID">@PlotRouteId</p>
                 <div id="ratings">
                     <br>
 
@@ -59,6 +57,8 @@
                     </select>
                 </div>
             </center>
+            <p id="route_id">@routeID</p>
+
         </div>
     </section>
 
@@ -93,83 +93,34 @@
 
     <script>
 
-            async function plot() {
 
-                var final_route = await calculateRoute(directionsService, directionsDisplay);
-                var x = document.getElementById("ratings");
-                var y = document.getElementById("routeID");
-                var z = document.getElementById("number_of_waypoints").value;
-                x.style.display = "block";
 
-                var data;
-                if(z == 1) {
-                    data = JSON.stringify({"start" : final_route.request.origin.query,
-                        "end" : final_route.request.destination.query,
-                        "waypointOne" : final_route.routes[0].legs[0].end_address,
-                        "waypointTwo" : "null",
-                        "waypointThree" : "null",
-                        "waypointFour" : "null",
-                        "waypointFive" : "null"});
-                }
-                if(z == 2) {
-                    data = JSON.stringify({"start" : final_route.request.origin.query,
-                        "end" : final_route.request.destination.query,
-                        "waypointOne" : final_route.routes[0].legs[0].end_address,
-                        "waypointTwo" : final_route.routes[0].legs[1].end_address,
-                        "waypointThree" : "null",
-                        "waypointFour" : "null",
-                        "waypointFive" : "null"});
-                }
-                if(z == 3) {
-                    data = JSON.stringify({"start" : final_route.request.origin.query,
-                        "end" : final_route.request.destination.query,
-                        "waypointOne" : final_route.routes[0].legs[0].end_address,
-                        "waypointTwo" : final_route.routes[0].legs[1].end_address,
-                        "waypointThree" : final_route.routes[0].legs[2].end_address,
-                        "waypointFour" : "null",
-                        "waypointFive" : "null"});
-                }
-                if(z == 4) {
-                    data = JSON.stringify({"start" : final_route.request.origin.query,
-                        "end" : final_route.request.destination.query,
-                        "waypointOne" : final_route.routes[0].legs[0].end_address,
-                        "waypointTwo" : final_route.routes[0].legs[1].end_address,
-                        "waypointThree" : final_route.routes[0].legs[2].end_address,
-                        "waypointFour" : final_route.routes[0].legs[3].end_address,
-                        "waypointFive" : "null"});
-                }
-                if(z == 5) {
-                    data = JSON.stringify({"start" : final_route.request.origin.query,
-                        "end" : final_route.request.destination.query,
-                        "waypointOne" : final_route.routes[0].legs[0].end_address,
-                        "waypointTwo" : final_route.routes[0].legs[1].end_address,
-                        "waypointThree" : final_route.routes[0].legs[2].end_address,
-                        "waypointFour" : final_route.routes[0].legs[3].end_address,
-                        "waypointFive" : final_route.routes[0].legs[4].end_address});
-                }
+                $(document).ready(function(){
+                    console.log("Running")
+                    var x = document.getElementById("route_id").value;
+                    var data = JSON.stringify({"route" : x});
+                    $.ajax({
+                        type : 'GET',
+                        url : '@routes.HomeController.getRouteFromDB',
+                        data : data,
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        success : function(data) {
+                            console.log("Success");
+                            console.log(data);
+                        },
+                        error : function(data) {
+                            console.log("Fail");
+                            console.log(data);
 
-                $.ajax({
-                    type : 'POST',
-                    url : '@routes.HomeController.saveRouteInfo',
-                    data : data,
-                    dataType: 'json',
-                    contentType: 'application/json',
-                    success : function(data) {
-                        console.log("Success");
-                        console.log(data);
-                    },
-                    error : function(data) {
-                        console.log("Fail");
-                        console.log(data);
-                        y.innerHTML = parseInt(data.responseText);
-                        y.style.display = "none";
-                    }
+                        }
+                    });
                 });
 
+                //var final_route = await calculateRoute(directionsService, directionsDisplay);
 
+                //var data;
 
-
-            }
 
 
             function submitRating() {
