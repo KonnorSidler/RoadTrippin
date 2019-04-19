@@ -66,8 +66,8 @@ public class HomeController extends Controller {
 
 
     public Result getRoutes() {
-        List<TripInfo> trips = TripInfo.find.all();
-        return ok(Json.toJson(trips));
+            List<TripInfo> trips = TripInfo.find.all();
+            return ok(Json.toJson(trips));
     }
 
     public Result getRoute(Long routeID) {
