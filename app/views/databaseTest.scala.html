@@ -3,7 +3,7 @@
  * message to display.
  *@
 
-@(dbTestForm: Form[DatabaseTest])
+@(dbTestForm: Form[DatabaseTest], newInt: Integer)
 
 @import helper._
 
@@ -20,5 +20,7 @@
     <input type="text" name="databaseMessage">
     <input type="submit" value="Submit">
     </form>
+
+    <p>@newInt</p>
 
 }

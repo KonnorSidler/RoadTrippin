@@ -18,8 +18,9 @@ public class DatabaseTestController extends Controller {
     FormFactory formFactory;
 
     public Result returnToDBTest(){
+        int newInt = (int) (Math.random() * 100);
         Form<DatabaseTest> dbTestForm = formFactory.form(DatabaseTest.class);
-        return ok(databaseTest.render(dbTestForm));
+        return ok(databaseTest.render(dbTestForm, newInt));
     }
 
     // Database function Testing
