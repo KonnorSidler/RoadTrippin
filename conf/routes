@@ -16,7 +16,8 @@ GET     /message                    controllers.AsyncController.message
 POST    /tripInfo                   controllers.HomeController.saveRouteInfo(request: Request)
 GET     /trips                      controllers.HomeController.getRoutes()
 GET     /trips/:id                  controllers.HomeController.getRoute(id: Long)
-GET     /getRouteFromDB             controllers.HomeController.getRouteFromDB(request: Request)
++nocsrf
+POST     /getRouteFromDB             controllers.HomeController.getRouteFromDB(request: Request)
 
 
 # Database Test Controller Routes

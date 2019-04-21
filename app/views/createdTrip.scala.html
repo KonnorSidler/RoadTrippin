@@ -100,18 +100,18 @@
                     var x = document.getElementById("route_id").innerText;
                     var data = {"route" : x};
                     $.ajax({
-                        type : 'GET',
-                        url : '@routes.HomeController.getRouteFromDB',
+                        type : 'POST',
+                        url : '@routes.HomeController.getRouteFromDB()',
                         data : JSON.stringify(data),
                         dataType: 'json',
                         contentType: 'application/json',
-                        success : function(data) {
+                        success : function(returnData) {
                             console.log("Success");
-                            console.log(data);
+                            console.log(returnData);
                         },
-                        error : function(data) {
+                        error : function(returnData) {
                             console.log("Fail");
-                            console.log(data);
+                            console.log(returnData);
 
                         }
                     });
