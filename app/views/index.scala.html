@@ -190,17 +190,17 @@
                     type : 'POST',
                     url : '@routes.HomeController.saveRouteInfo',
                     data : data,
-                    dataType: 'json',
+                    dataType: 'html',
                     contentType: 'application/json',
                     success : function(data) {
                         console.log("Success");
                         console.log(data);
+                        y.innerHTML = parseInt(data);
+                        y.style.display = "none";
                     },
                     error : function(data) {
                         console.log("Fail");
                         console.log(data);
-                        y.innerHTML = parseInt(data.responseText);
-                        y.style.display = "none";
                     }
                 });
 
@@ -219,7 +219,7 @@
                     type : 'POST',
                     url : '@routes.RatingsController.addRating',
                     data : JSON.stringify(data),
-                    dataType: 'json',
+                    dataType: 'html',
                     contentType: 'application/json',
                     success : function(data) {
                         console.log("Success");
