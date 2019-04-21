@@ -77,18 +77,10 @@ public class HomeController extends Controller {
     public Result getRouteFromDB(Http.Request request) {
         System.out.println("Got the getRouteFromDB");
         JsonNode json = request.body().asJson();
-        System.out.println("JSON Node bound");
-        System.out.println(json);
-        if (json == null) {
-          System.out.println("JSON was null");
-        } else {
-          System.out.println("JSON ain't null");
-        }
         Long routeID = Long.parseLong(json.findPath("route").textValue());
-        System.out.println("String routeID assigned");
         TripInfo trip = TripInfo.find.byId(routeID);
-        System.out.println(trip);
-        return ok("loaded");
+
+        return ok(Json.toJson(trip));
     }
 
 

@@ -105,9 +105,23 @@
                         data : JSON.stringify(data),
                         dataType: 'json',
                         contentType: 'application/json',
-                        success : function(returnData) {
+                        success : function(response) {
                             console.log("Success");
-                            console.log(returnData);
+                            console.log(response);
+                            var waypnts = [{"location": response.waypointOne, "stopover" : true}, {"location": response.waypointTwo, "stopover" : true}, {"location": response.waypointThree, "stopover" : true}, {"location": response.waypointFour, "stopover" : true}, {"location": response.waypointFive, "stopover" : true}, ]
+                            var request = {
+                                origin: response.startLocation,
+                                destination: response.endLocation,
+                                travelMode: "DRIVING",
+                                waypoints: waypnts,
+                                optimizeWaypoints: true
+                            };
+                            directionsService.route(request, function(result, status) {
+                                if (status === 'OK') {
+                                    directionsDisplay.setDirections(result);
+                                    console.log(result);
+                                }
+                            });
                         },
                         error : function(returnData) {
                             console.log("Fail");
