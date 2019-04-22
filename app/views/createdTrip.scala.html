@@ -96,7 +96,6 @@
 
 
                 $(document).ready(function(){
-                    console.log("Running")
                     var x = document.getElementById("route_id").innerText;
                     var data = {"route" : x};
                     $.ajax({
@@ -108,7 +107,34 @@
                         success : function(response) {
                             console.log("Success");
                             console.log(response);
-                            var waypnts = [{"location": response.waypointOne, "stopover" : true}, {"location": response.waypointTwo, "stopover" : true}, {"location": response.waypointThree, "stopover" : true}, {"location": response.waypointFour, "stopover" : true}, {"location": response.waypointFive, "stopover" : true}, ]
+                            var waypnts = [];
+                            for(var i = 0; i < 5; i++) {
+                                if(i == 0) {
+                                    if(response.waypointOne != "null") {
+                                        waypnts.push({"location" : response.waypointOne, "stopover" : true});
+                                    }
+                                }
+                                if (i == 1){
+                                    if(response.waypointTwo != "null") {
+                                        waypnts.push({"location" : response.waypointTwo, "stopover" : true});
+                                    }
+                                }
+                                if (i == 2){
+                                    if(response.waypointThree != "null") {
+                                        waypnts.push({"location" : response.waypointThree, "stopover" : true});
+                                    }
+                                }
+                                if (i == 3){
+                                    if(response.waypointFour != "null") {
+                                        waypnts.push({"location" : response.waypointFour, "stopover" : true});
+                                    }
+                                }
+                                if (i == 4){
+                                    if(response.waypointFive != "null") {
+                                        waypnts.push({"location" : response.waypointFive, "stopover" : true});
+                                    }
+                                }
+                            }
                             var request = {
                                 origin: response.startLocation,
                                 destination: response.endLocation,
@@ -123,9 +149,10 @@
                                 }
                             });
                         },
-                        error : function(returnData) {
-                            console.log("Fail");
-                            console.log(returnData);
+                        error : function(response) {
+                            console.log("Could not load route");
+                            alert("Could not load route, please try again!");
+                            console.log(response);
 
                         }
                     });
@@ -148,13 +175,14 @@
                     data : JSON.stringify(data),
                     dataType: 'html',
                     contentType: 'application/json',
-                    success : function(data) {
-                        console.log("Success");
-                        console.log(data);
+                    success : function(response) {
+                        console.log("Rating submited");
+                        alert("Rating submited!");
                     },
-                    error : function(data) {
-                        console.log("Fail");
-                        console.log(data);
+                    error : function(response) {
+                        console.log("Could not submit");
+                        console.log(response);
+                        alert("Something went wrong, please try again later!")
                     }
                 });
 

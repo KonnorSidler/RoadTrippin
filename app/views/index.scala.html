@@ -193,7 +193,7 @@
                     dataType: 'html',
                     contentType: 'application/json',
                     success : function(data) {
-                        console.log("Success");
+                        console.log("Route saved");
                         console.log(data);
                         y.innerHTML = parseInt(data);
                         y.style.display = "none";
@@ -222,12 +222,13 @@
                     dataType: 'html',
                     contentType: 'application/json',
                     success : function(data) {
-                        console.log("Success");
-                        console.log(data);
+                        console.log("Rating submited");
+                        alert("Rating submited!");
                     },
                     error : function(data) {
-                        console.log("Fail");
+                        console.log("Could not submit");
                         console.log(data);
+                        alert("Something went wrong, please try again later!")
                     }
                 });
 
