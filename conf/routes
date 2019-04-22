@@ -5,7 +5,7 @@
 # An example controller showing a sample home page
 GET     /                           controllers.HomeController.index
 
-GET     /tripcreate                           controllers.HomeController.tripcreation
+
 # An example controller showing how to use dependency injection
 GET     /count                      controllers.CountController.count
 # An example controller showing how to write asynchronous code
@@ -13,11 +13,13 @@ GET     /message                    controllers.AsyncController.message
 
 # tripInfo routing
 +nocsrf
-POST    /tripInfo                   controllers.HomeController.saveRouteInfo(request: Request)
-GET     /trips                      controllers.HomeController.getRoutes()
-GET     /trips/:id                  controllers.HomeController.getRoute(id: Long)
+POST    /trip/save                  controllers.HomeController.saveRouteInfo(request: Request)
+GET     /trip/all                   controllers.HomeController.getRoutes()
+GET     /trip/route=:id             controllers.HomeController.getRoute(id: Long)
+GET     /trip                       controllers.HomeController.tripcreation
+
 +nocsrf
-POST     /getRouteFromDB             controllers.HomeController.getRouteFromDB(request: Request)
+POST     /getroute           controllers.HomeController.getRouteFromDB(request: Request)
 
 
 # Database Test Controller Routes
