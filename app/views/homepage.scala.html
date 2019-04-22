@@ -61,6 +61,30 @@
 	  </div>
         </footer>
 
+        <script>
+
+
+
+                    $(document).ready(function(){
+                        $.ajax({
+                            type : 'GET',
+                            url : '@routes.HomeController.generateRandomRouteList()',
+                            dataType: 'json',
+                            contentType: 'application/json',
+                            success : function(response) {
+                                console.log("Success");
+                                console.log(response);
+                              },
+                            error : function(response) {
+                                console.log("Could not load route");
+                                alert("Could not load route, please try again!");
+                                console.log(response);
+
+                            }
+                        });
+                    });
+          </script>
+
     </body>
 
     </html>
