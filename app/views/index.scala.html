@@ -28,7 +28,7 @@
             <nav>
                 <ul>
                     <li><a href="/">Home</a></li>
-                    <li><a href="/tripcreate">Create Trip</a></li>
+                    <li><a href="/trip">Create Trip</a></li>
                     <li><a href="#">About</a></li>
                     <li><a href="#">Contact Us</a></li>
                     <li><a href="/user">Log In</a></li>
@@ -118,6 +118,7 @@
             function initMap() {
                 map = new google.maps.Map(document.getElementById('map'), {
                     center: {lat: 39.0119, lng: -98.4842},
+                    mapTypeId: google.maps.MapTypeId.HYBRID,
                     zoom: 5
                 });
 
@@ -132,7 +133,7 @@
     <script>
 
             async function plot() {
-
+                document.documentElement.scrollTop = 0;
                 var final_route = await calculateRoute(directionsService, directionsDisplay);
                 var x = document.getElementById("ratings");
                 var y = document.getElementById("routeID");
@@ -190,17 +191,17 @@
                     type : 'POST',
                     url : '@routes.HomeController.saveRouteInfo',
                     data : data,
-                    dataType: 'json',
+                    dataType: 'html',
                     contentType: 'application/json',
                     success : function(data) {
-                        console.log("Success");
+                        console.log("Route saved");
                         console.log(data);
+                        y.innerHTML = parseInt(data);
+                        y.style.display = "none";
                     },
                     error : function(data) {
                         console.log("Fail");
                         console.log(data);
-                        y.innerHTML = parseInt(data.responseText);
-                        y.style.display = "none";
                     }
                 });
 
@@ -219,15 +220,16 @@
                     type : 'POST',
                     url : '@routes.RatingsController.addRating',
                     data : JSON.stringify(data),
-                    dataType: 'json',
+                    dataType: 'html',
                     contentType: 'application/json',
                     success : function(data) {
-                        console.log("Success");
-                        console.log(data);
+                        console.log("Rating submited");
+                        alert("Rating submited!");
                     },
                     error : function(data) {
-                        console.log("Fail");
+                        console.log("Could not submit");
                         console.log(data);
+                        alert("Something went wrong, please try again later!")
                     }
                 });
 

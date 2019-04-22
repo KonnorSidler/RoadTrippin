@@ -1,0 +1,202 @@
+@*
+ * This template takes a single argument, a String containing a
+ * message to display.
+ *@
+
+@(routeID: Long)
+
+@import helper._
+
+@*
+ * Call the `main` template with two arguments. The first
+ * argument is a `String` with the title of the page, the second
+ * argument is an `Html` object containing the body of the page.
+ *@
+@main("Create Trip") {
+
+
+
+
+  <script type='text/javascript' src='@routes.Assets.versioned("javascripts/index.js")'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h2>Road Trippin'</h2>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/trip">Create Trip</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="/user">Log In</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="mapsection">
+        <div id="map"></div>
+    </section>
+
+    <section id="options">
+        <div id="side_bar">
+            <center>
+                <div id="ratings">
+                    <br>
+
+                    <button id="rating_submit" onclick="submitRating()">Rate</button>
+                    <select id="route_rating">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+            </center>
+            <p id="route_id">@routeID</p>
+
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+    <script>
+            //Initializes the map and sets up routing services.
+            var map;
+            var directionsService;
+            var directionsDisplay;
+            var service;
+            function initMap() {
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: {lat: 39.0119, lng: -98.4842},
+                    mapTypeId: google.maps.MapTypeId.HYBRID,
+                    zoom: 5
+                });
+
+                service = new google.maps.places.PlacesService(map);
+
+                directionsService = new google.maps.DirectionsService();
+                directionsDisplay = new google.maps.DirectionsRenderer();
+                directionsDisplay.setMap(map);
+            }
+    </script>
+
+    <script>
+
+
+
+                $(document).ready(function(){
+                    var x = document.getElementById("route_id").innerText;
+                    var data = {"route" : x};
+                    $.ajax({
+                        type : 'POST',
+                        url : '@routes.HomeController.getRouteFromDB()',
+                        data : JSON.stringify(data),
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        success : function(response) {
+                            console.log("Success");
+                            console.log(response);
+                            var waypnts = [];
+                            for(var i = 0; i < 5; i++) {
+                                if(i == 0) {
+                                    if(response.waypointOne != "null") {
+                                        waypnts.push({"location" : response.waypointOne, "stopover" : true});
+                                    }
+                                }
+                                if (i == 1){
+                                    if(response.waypointTwo != "null") {
+                                        waypnts.push({"location" : response.waypointTwo, "stopover" : true});
+                                    }
+                                }
+                                if (i == 2){
+                                    if(response.waypointThree != "null") {
+                                        waypnts.push({"location" : response.waypointThree, "stopover" : true});
+                                    }
+                                }
+                                if (i == 3){
+                                    if(response.waypointFour != "null") {
+                                        waypnts.push({"location" : response.waypointFour, "stopover" : true});
+                                    }
+                                }
+                                if (i == 4){
+                                    if(response.waypointFive != "null") {
+                                        waypnts.push({"location" : response.waypointFive, "stopover" : true});
+                                    }
+                                }
+                            }
+                            var request = {
+                                origin: response.startLocation,
+                                destination: response.endLocation,
+                                travelMode: "DRIVING",
+                                waypoints: waypnts,
+                                optimizeWaypoints: true
+                            };
+                            directionsService.route(request, function(result, status) {
+                                if (status === 'OK') {
+                                    directionsDisplay.setDirections(result);
+                                    console.log(result);
+                                }
+                            });
+                        },
+                        error : function(response) {
+                            console.log("Could not load route");
+                            alert("Could not load route, please try again!");
+                            console.log(response);
+
+                        }
+                    });
+                });
+
+                //var final_route = await calculateRoute(directionsService, directionsDisplay);
+
+                //var data;
+
+
+
+            function submitRating() {
+                var x  = document.getElementById("route_rating").value;
+                var y = document.getElementById("routeID").innerText;
+                var data = {"trip_rating" : x,
+                            "trip_id" : y};
+                $.ajax({
+                    type : 'POST',
+                    url : '@routes.RatingsController.addRating',
+                    data : JSON.stringify(data),
+                    dataType: 'html',
+                    contentType: 'application/json',
+                    success : function(response) {
+                        console.log("Rating submited");
+                        alert("Rating submited!");
+                    },
+                    error : function(response) {
+                        console.log("Could not submit");
+                        console.log(response);
+                        alert("Something went wrong, please try again later!")
+                    }
+                });
+
+            }
+    </script>
+
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYZdCpCHLlMxV_gdqMUV-4c6t9iFhLaxM&libraries=places&callback=initMap"
+    type="text/javascript"></script>
+
+    <script type='text/javascript' src='@routes.Assets.versioned("javascripts/main.js")'></script>
+
+
+
+
+}

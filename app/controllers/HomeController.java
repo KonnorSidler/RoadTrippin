@@ -31,8 +31,6 @@ public class HomeController extends Controller {
      * <code>GET</code> request with a path of <code>/</code>.
      */
     public Result index() {
-
-
         return ok(views.html.homepage.render());
     }
 
@@ -72,11 +70,24 @@ public class HomeController extends Controller {
 
 
 
+    public Result getRoute(Long routeID) {
+      return ok(createdTrip.render(routeID));
+    }
+
+    public Result getRouteFromDB(Http.Request request) {
+        System.out.println("Got the getRouteFromDB");
+        JsonNode json = request.body().asJson();
+        Long routeID = Long.parseLong(json.findPath("route").textValue());
+        TripInfo trip = TripInfo.find.byId(routeID);
+
+        return ok(Json.toJson(trip));
+    }
+
+
+
 
     public Result testLink(Http.Request request) {
-
       return ok("Got it!" + request.body().asJson());
-
     }
 
 
