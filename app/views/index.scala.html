@@ -118,6 +118,7 @@
             function initMap() {
                 map = new google.maps.Map(document.getElementById('map'), {
                     center: {lat: 39.0119, lng: -98.4842},
+                    mapTypeId: google.maps.MapTypeId.HYBRID,
                     zoom: 5
                 });
 
@@ -132,7 +133,7 @@
     <script>
 
             async function plot() {
-
+                document.documentElement.scrollTop = 0;
                 var final_route = await calculateRoute(directionsService, directionsDisplay);
                 var x = document.getElementById("ratings");
                 var y = document.getElementById("routeID");
