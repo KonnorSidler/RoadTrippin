@@ -9,6 +9,7 @@ import play.data.FormFactory;
 import play.data.Form;
 import javax.inject.Inject;
 import java.util.List;
+import java.util.ArrayList;
 import io.ebean.Model;
 import play.libs.Json;
 import play.libs.Json.*;
@@ -81,6 +82,22 @@ public class HomeController extends Controller {
         TripInfo trip = TripInfo.find.byId(routeID);
 
         return ok(Json.toJson(trip));
+    }
+
+    public Result generateRandomRouteList(Http.Request request) {
+      int resultCount = 6;
+      List<TripInfo> trips = new ArrayList<TripInfo>();
+      List<TripInfo> allTrips = TripInfo.find.all();
+      int count = allTrips.size();
+      for (int i = 0; i < resultCount; i++) {
+        int randomRouteIdInt = (int) (Math.random() * count) + 1;
+        Long randomRouteId = new Long(randomRouteIdInt);
+        TripInfo newTrip = TripInfo.find.byId(randomRouteId);
+        trips.add(newTrip);
+      }
+
+      return ok(Json.toJson(trips));
+
     }
 
 
