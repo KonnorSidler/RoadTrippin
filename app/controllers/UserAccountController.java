@@ -35,26 +35,26 @@ public class UserAccountController extends Controller {
         Form<UserAccount> userForm = formFactory.form(UserAccount.class).bindFromRequest(request);
         UserAccount acc = userForm.get();
         UserAccount findUser = UserAccount.find.byId(acc.getId());
-        checkLogin(request);
-        return redirect("/trip").addingToSession(request, "user", findUser.longToString(findUser.getId()));
+//        checkLogin(request);
+        return redirect("/trip").addingToSession(request, "user", findUser.getName());
     }
 
     public Result logout(Http.Request request){
-        return redirect("/").removingFromSession(request, "user");
+        return redirect("/").removingFromSession(request, "user_account");
     }
 
-    public Result checkLogin(Http.Request request) {
-
-        /*checks if login is valid, isn't currently working BUT
-        when you login with an invalid ID, it's a nullpointer, so login is definitely working but not fully
-
-         */
-
-        return request.session()
-                .getOptional("user")
-                .map(user -> ok("Hello " + user))
-                .orElseGet(() -> unauthorized("Oops, you are not connected"));
-    }
+//    public Result checkLogin(Http.Request request) {
+//
+//        /*checks if login is valid, isn't currently working BUT
+//        when you login with an invalid ID, it's a nullpointer, so login is definitely working but not fully
+//
+//         */
+//
+//        return request.session()
+//                .getOptional("user_account")
+//                .map(userAccount -> ok("Hello " + userAccount))
+//                .orElseGet(() -> unauthorized("Oops, you are not connected"));
+//    }
 
     public Result createUserScreen(){
         Form<UserAccount> userForm = formFactory.form(UserAccount.class);

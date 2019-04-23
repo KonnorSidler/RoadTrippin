@@ -8,6 +8,29 @@
 * argument is an `Html` object containing the body of the page.
 *@
 @main("Login") {
+    <script type='text/javascript' src='@routes.Assets.versioned("javascripts/index.js")'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h2>Road Trippin'</h2>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/trip">Create Trip</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="/user/create">Create an Account</a></li>
+                    <li><a href="/user">Profile</a></li>
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="/logout">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
     <body>
         <form class="input-form" action="@routes.UserAccountController.logout()" method="post">
             @CSRF.formField

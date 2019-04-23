@@ -14,6 +14,28 @@
 *@
 @main("User Settings") {
 
+    <script type='text/javascript' src='@routes.Assets.versioned("javascripts/index.js")'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h2>Road Trippin'</h2>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/trip">Create Trip</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="/user/create">Create an Account</a></li>
+                    <li><a href="/user">Profile</a></li>
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="/logout">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
     <head><b>User Settings</b></head>
     <body>
         <b1>Update user</b1>
@@ -34,12 +56,12 @@
         <form class="input-form" action="@routes.UserAccountController.listUsers()" method="get">
             <input type="submit" value="Get all users">
         </form>
-        <form class="input-form" action="@routes.UserAccountController.checkLogin()" method="post">
-            @CSRF.formField
-            <input type="number" name="id" id="user_id_input">
-            <input type="password" name="password" id="user_password_input">
-            <input type="submit" value="Login">
-        </form>
+        @*<form class="input-form" action="@routes.UserAccountController.checkLogin()" method="post">*@
+            @*CSRF.formField*@
+            @*<input type="number" name="id" id="user_id_input">*@
+            @*<input type="password" name="password" id="user_password_input">*@
+            @*<input type="submit" value="Login">*@
+        @*</form>*@
 
         <form class="input-form" action="@routes.UserAccountController.logout()" method="post">
             @CSRF.formField

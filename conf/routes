@@ -45,7 +45,7 @@ POST    /user                       controllers.UserAccountController.createUser
 GET     /user/all                   controllers.UserAccountController.listUsers()
 +nocsrf
 #POST    /user/login                 controllers.UserAccountController.login(request: Request)
-POST    /login                      controllers.UserAccountController.checkLogin(request: Request)
+#POST    /login                      controllers.UserAccountController.checkLogin(request: Request)
 POST    /login                      controllers.UserAccountController.login(request: Request)
 POST    /logout                     controllers.UserAccountController.logout(request: Request)
 GET     /login                      controllers.UserAccountController.showLogin()
