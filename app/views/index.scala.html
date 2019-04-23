@@ -101,8 +101,17 @@
                     <br>
                     Share your trip on Twitter!
                     <br>
-                    <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text="Check out this Trip!" data-hashtags="RoadTrippin" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
+                    <a href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+                        id = "twitter-call"
+                    class="twitter-share-button"
+                    data-size="large"
+                    data-url= ""
+                    data-text="Check out this Trip!"
+                    data-hashtags="RoadTrippin"
+                    data-show-count="false">
+                    Tweet</a>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                 </div>
             </center>
         </div>
@@ -206,6 +215,12 @@
                         console.log(data);
                         y.innerHTML = parseInt(data);
                         y.style.display = "none";
+
+                        var url = "http://fierce-hamlet-30159.herokuapp.com/trip/route=";
+                        var recent = document.getElementById("routeID");
+                        var route = url+recent;
+                        var button = document.getElementById("twitter-call");
+                        button.setAttribute("data-url",route);
                     },
                     error : function(data) {
                         console.log("Fail");
