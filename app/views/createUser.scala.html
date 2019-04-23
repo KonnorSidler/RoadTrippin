@@ -1,10 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>$Title$</title>
-    </head>
+@*
+* This template takes a single argument, a String containing a
+* message to display.
+*@
+
+@(userForm: Form[UserAccount])
+
+@import helper._
+
+@*
+* Call the `main` template with two arguments. The first
+* argument is a `String` with the title of the page, the second
+* argument is an `Html` object containing the body of the page.
+*@
+@main("User Settings") {
+
+    <head><b>User Settings</b></head>
     <body>
-$END$
+        <b1>Create user</b1>
+        <form class="input-form" action="@routes.UserAccountController.createUser()" method="post">
+            @CSRF.formField
+            <input type="text" name="name" id="user_name_input">
+            <input type="text" name="location" id="user_location_input">
+            <input type="password" name="password" id="user_password_input">
+            <input type="submit" value="Create user">
+        </form>
     </body>
-</html>
+    <footer></footer>
+}

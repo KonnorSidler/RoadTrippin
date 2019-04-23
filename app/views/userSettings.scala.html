@@ -16,13 +16,6 @@
 
     <head><b>User Settings</b></head>
     <body>
-        <b1>Create user</b1>
-        <form class="input-form" action="@routes.UserAccountController.createUser()" method="post">
-            @CSRF.formField
-            <input type="text" name="name" id="user_name_input">
-            <input type="text" name="location" id="user_location_input">
-            <input type="submit" value="Create user">
-        </form>
         <b1>Update user</b1>
         <form class="input-form" action="@routes.UserAccountController.updateUser()" method="put">
             @CSRF.formField
@@ -40,6 +33,17 @@
         <b1>Get all users</b1>
         <form class="input-form" action="@routes.UserAccountController.listUsers()" method="get">
             <input type="submit" value="Get all users">
+        </form>
+        <form class="input-form" action="@routes.UserAccountController.checkLogin()" method="post">
+            @CSRF.formField
+            <input type="number" name="id" id="user_id_input">
+            <input type="password" name="password" id="user_password_input">
+            <input type="submit" value="Login">
+        </form>
+
+        <form class="input-form" action="@routes.UserAccountController.logout()" method="post">
+            @CSRF.formField
+            <input type="submit" value="Logout">
         </form>
     </body>
     <footer></footer>

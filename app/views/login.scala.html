@@ -1,10 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>$Title$</title>
-    </head>
+@(userForm: Form[UserAccount])
+
+@import helper._
+
+@*
+* Call the `main` template with two arguments. The first
+* argument is a `String` with the title of the page, the second
+* argument is an `Html` object containing the body of the page.
+*@
+@main("Login") {
     <body>
-$END$
+        <form class="input-form" action="@routes.UserAccountController.login()" method="post">
+            @CSRF.formField
+        <input type="text" name="name" id="user_name_input">
+        @*<input type="text" name="password" id="user_password_input">*@
+        <input type="submit" value="Login">
+        </form>
+        <form class="input-form" action="@routes.UserAccountController.checkLogin()" method="post">
+            @CSRF.formField
+            <input type="number" name="id" id="user_id_input">
+            <input type="password" name="password" id="user_password_input">
+            <input type="submit" value="Login">
+        </form>
     </body>
-</html>
+}

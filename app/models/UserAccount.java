@@ -50,4 +50,9 @@ public class UserAccount extends Model {
   public void setPassword(String password) {
     this.password = password;
   }
+
+  public String longToString(Long id) {
+    return "" + id + "";
+  }
+
 }

@@ -36,13 +36,22 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
 # User routing
 +nocsrf
-GET     /user                       controllers.UserAccountController.returnHome()
+GET     /user                       controllers.UserAccountController.userSettingsScreen()
 GET     /user/find                  controllers.UserAccountController.getUser(request: Request)
 +nocsrf
 PUT     /user                       controllers.UserAccountController.updateUser(request: Request)
 +nocsrf
 POST    /user                       controllers.UserAccountController.createUser(request: Request)
 GET     /user/all                   controllers.UserAccountController.listUsers()
++nocsrf
+#POST    /user/login                 controllers.UserAccountController.login(request: Request)
+POST    /login                      controllers.UserAccountController.checkLogin(request: Request)
+POST    /login                      controllers.UserAccountController.login(request: Request)
+POST    /logout                     controllers.UserAccountController.logout(request: Request)
+GET     /login                      controllers.UserAccountController.showLogin()
+GET     /logout                     controllers.UserAccountController.showLogout()
+GET     /user/create                controllers.UserAccountController.createUserScreen()
+POST    /user/create                controllers.UserAccountController.createUser(request: Request)
 
 
 # Rating routing
