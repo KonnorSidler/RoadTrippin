@@ -100,6 +100,29 @@ public class HomeController extends Controller {
 
     }
 
+    public Result generateRecentRouteList(Http.Request request) {
+      int resultCount = 6;
+      List<TripInfo> trips = new ArrayList<TripInfo>();
+      List<TripInfo> allTrips = TripInfo.find.all();
+      int size = allTrips.size();
+      Long lastRouteId = new Long(size);
+      if (size < 5) {
+        for (int i = 0; i < resultCount; i++) {
+          TripInfo newTrip = TripInfo.find.byId(lastRouteId);
+          trips.add(newTrip);
+          lastRouteId = lastRouteId - 1;
+        }
+      } else {
+        for (int i = 0; i < size; i++) {
+          Long routeId = new Long(i);
+          TripInfo newTrip = TripInfo.find.byId(routeId);
+          trips.add(newTrip);
+        }
+      }
+
+      return ok(Json.toJson(trips));
+    }
+
 
 
 
