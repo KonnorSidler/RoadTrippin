@@ -17,10 +17,11 @@ POST    /trip/save                  controllers.HomeController.saveRouteInfo(req
 GET     /trip/all                   controllers.HomeController.getRoutes()
 GET     /trip/route=:id             controllers.HomeController.getRoute(id: Long)
 GET     /trip                       controllers.HomeController.tripcreation
-GET     /trip/randomroute           controllers.HomeController.generateRandomRouteList(request: Request)
+GET     /trip/random/route          controllers.HomeController.generateRandomRouteList(request: Request)
+GET     /trip/recent/route          controllers.HomeController.generateRecentRouteList(request: Request)
 
 +nocsrf
-POST     /getroute           controllers.HomeController.getRouteFromDB(request: Request)
+POST     /getroute                  controllers.HomeController.getRouteFromDB(request: Request)
 
 
 # Database Test Controller Routes

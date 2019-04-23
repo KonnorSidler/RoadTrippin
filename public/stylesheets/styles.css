@@ -3,7 +3,23 @@
   width: 80%;
   margin: auto;
   padding-bottom: 50px;
+    padding-top: 50px;
 }
+
+#Listings {
+  display: flex;
+}
+
+#recent {
+    background-color: #cc0000;
+    flex: 50%;
+}
+
+#random {
+    background-color: cyan;
+    flex: 50%;
+}
+
 
 body {
   font-family: Lato, Arial, Helvetica, sans-serif;
@@ -43,7 +59,6 @@ a.button {
     -webkit-appearance: button;
     -moz-appearance: button;
     appearance: button;
-
     text-decoration: none;
     color: initial;
     padding: 3px;

@@ -106,19 +106,21 @@ public class HomeController extends Controller {
       List<TripInfo> allTrips = TripInfo.find.all();
       int size = allTrips.size();
       Long lastRouteId = new Long(size);
-      if (size < 5) {
-        for (int i = 0; i < resultCount; i++) {
-          TripInfo newTrip = TripInfo.find.byId(lastRouteId);
-          trips.add(newTrip);
-          lastRouteId = lastRouteId - 1;
-        }
-      } else {
-        for (int i = 0; i < size; i++) {
-          Long routeId = new Long(i);
-          TripInfo newTrip = TripInfo.find.byId(routeId);
-          trips.add(newTrip);
-        }
+
+      if(size < 6) {
+          long count = 1;
+          for(int i = 0; i < size; i++) {
+            trips.add(TripInfo.find.byId(count));
+            count++;
+          }
       }
+      else {
+          for (int i = 0; i < resultCount; i++) {
+              trips.add(TripInfo.find.byId(lastRouteId));
+              lastRouteId--;
+          }
+      }
+
 
       return ok(Json.toJson(trips));
     }
