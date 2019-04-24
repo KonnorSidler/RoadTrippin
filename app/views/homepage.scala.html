@@ -55,7 +55,20 @@
         </section>
 
         <section id="Listings">
-          <ul id="tripInfos"></ul>
+          <div id="recent">
+            <h2>
+              <center>
+                Recently Created Trips
+                </center>
+                </h2>
+          </div>
+            <div id="random">
+              <h2>
+                <center>
+                  Random Trips
+                  </center>
+                  </h2>
+            </div>
         </section>
 
         <footer class="footer">
@@ -63,6 +76,131 @@
 
 	  </div>
         </footer>
+
+        <script>
+
+
+//AIzaSyBYZdCpCHLlMxV_gdqMUV-4c6t9iFhLaxM
+                    $(document).ready(function(){
+                        $.ajax({
+                            type : 'GET',
+                            url : '@routes.HomeController.generateRecentRouteList()',
+                            dataType: 'json',
+                            contentType: 'application/json',
+                            success : function(response) {
+                                console.log("Success");
+                                console.log(response);
+                                var recent = document.getElementById("recent");
+                                var directionsService = new google.maps.DirectionsService();
+                                for(var j = response.length - 1; j >= 0; j--) {
+                                    var polyline;
+                                    var waypnts = [];
+                                    if(response[j].waypointOne != "null") {
+                                        waypnts.push({"location" : response[j].waypointOne, "stopover" : true});
+                                    }
+                                    if(response[j].waypointTwo != "null") {
+                                        waypnts.push({"location" : response[j].waypointTwo, "stopover" : true});
+                                    }
+                                    if(response[j].waypointThree != "null") {
+                                        waypnts.push({"location" : response[j].waypointThree, "stopover" : true});
+                                    }
+                                    if(response[j].waypointFour != "null") {
+                                        waypnts.push({"location" : response[j].waypointFour, "stopover" : true});
+                                    }
+                                    if(response[j].waypointFive != "null") {
+                                        waypnts.push({"location" : response[j].waypointFive, "stopover" : true});
+                                    }
+                                    var request = {
+                                        origin: response[j].startLocation,
+                                        destination: response[j].endLocation,
+                                        travelMode: "DRIVING",
+                                        waypoints: waypnts,
+                                        optimizeWaypoints: true
+                                    };
+                                    directionsService.route(request, function(result, status) {
+                                        if (status ==='OK') {
+                                            console.log(result);
+                                            polyline = result.routes[0].overview_polyline;
+                                            var div = document.createElement("DIV");
+                                            div.setAttribute("class", "route");
+                                            var img = document.createElement("IMG");
+                                            img.setAttribute("src", "https://maps.googleapis.com/maps/api/staticmap?path=weight:10%|color:red|enc:"+ polyline + "&size=400x400&maptype=hybrid&key=AIzaSyBYZdCpCHLlMxV_gdqMUV-4c6t9iFhLaxM");
+                                            div.appendChild(img);
+                                            recent.appendChild(div);
+                                        }
+                                    });
+                                }
+                            },
+                            error : function(response) {
+                                console.log("Could not load route");
+                                alert("Could not load route, please try again!");s
+                                console.log(response);
+
+                            }
+                        });
+
+                        $.ajax({
+                            type : 'GET',
+                            url : '@routes.HomeController.generateRandomRouteList()',
+                            dataType: 'json',
+                            contentType: 'application/json',
+                            success : function(response) {
+                                console.log("Success");
+                                console.log(response);
+                                var random = document.getElementById("random");
+                                var directionsService = new google.maps.DirectionsService();
+                                for(var j = 0; j < response.length; j++) {
+                                    var polyline;
+                                    var waypnts = [];
+                                    if(response[j].waypointOne != "null") {
+                                        waypnts.push({"location" : response[j].waypointOne, "stopover" : true});
+                                    }
+                                    if(response[j].waypointTwo != "null") {
+                                        waypnts.push({"location" : response[j].waypointTwo, "stopover" : true});
+                                    }
+                                    if(response[j].waypointThree != "null") {
+                                        waypnts.push({"location" : response[j].waypointThree, "stopover" : true});
+                                    }
+                                    if(response[j].waypointFour != "null") {
+                                        waypnts.push({"location" : response[j].waypointFour, "stopover" : true});
+                                    }
+                                    if(response[j].waypointFive != "null") {
+                                        waypnts.push({"location" : response[j].waypointFive, "stopover" : true});
+                                    }
+                                    var request = {
+                                        origin: response[j].startLocation,
+                                        destination: response[j].endLocation,
+                                        travelMode: "DRIVING",
+                                        waypoints: waypnts,
+                                        optimizeWaypoints: true
+                                    };
+                                    directionsService.route(request, function(result, status) {
+                                        if (status ==='OK') {
+                                            console.log(result);
+                                            polyline = result.routes[0].overview_polyline;
+                                            var div = document.createElement("DIV");
+                                            div.setAttribute("class", "route");
+                                            var img = document.createElement("IMG");
+                                            img.setAttribute("src", "https://maps.googleapis.com/maps/api/staticmap?path=weight:10%|color:red|enc:"+ polyline + "&size=400x400&maptype=hybrid&key=AIzaSyBYZdCpCHLlMxV_gdqMUV-4c6t9iFhLaxM");
+                                            div.appendChild(img);
+                                            random.appendChild(div);
+                                        }
+                                    });
+                                }
+                              },
+                            error : function(response) {
+                                console.log("Could not load route");
+                                alert("Could not load route, please try again!");s
+                                console.log(response);
+
+                            }
+                        });
+                    });
+          </script>
+
+
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYZdCpCHLlMxV_gdqMUV-4c6t9iFhLaxM&libraries=places"
+        type="text/javascript"></script>
 
     </body>
 
