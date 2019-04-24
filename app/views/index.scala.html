@@ -217,10 +217,10 @@
                         y.style.display = "none";
 
                         var url = "http://fierce-hamlet-30159.herokuapp.com/trip/route=";
-                        var recent = document.getElementById("routeID");
-                        var route = url+recent;
-                        var button = document.getElementById("twitter-call");
-                        button.setAttribute("data-url",route);
+                        var routeID = document.getElementById("routeID");
+                        var finalRoute = url+routeID;
+                        var twitterURL = document.getElementById("twitter-call");
+                        twitterURL.setAttribute("data-url",finalRoute);
                     },
                     error : function(data) {
                         console.log("Fail");
