@@ -11,13 +11,19 @@
 }
 
 #recent {
-    background-color: #cc0000;
-    flex: 50%;
+    border-radius: 25px;
+    border: 2px solid #f4f4f4;
+    background-color: #a39782;
+    flex: 48%;
+    padding: 1%;
 }
 
 #random {
-    background-color: cyan;
-    flex: 50%;
+    border-radius: 25px;
+    border: 2px solid #f4f4f4;
+    background-color: #b99a8b;
+    flex: 48%;
+    padding: 1%;
 }
 
 
@@ -27,7 +33,7 @@ body {
   line-height: 1.5;
   padding: 0;
   margin: 0;
-  background-color: #f4f4f4;
+  background-color: #f7f8f7;
 }
 
 .container {
