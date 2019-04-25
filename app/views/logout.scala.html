@@ -1,8 +1,3 @@
-@*
-* This template takes a single argument, a String containing a
-* message to display.
-*@
-
 @(userForm: Form[UserAccount])
 
 @import helper._
@@ -12,8 +7,7 @@
 * argument is a `String` with the title of the page, the second
 * argument is an `Html` object containing the body of the page.
 *@
-@main("User Settings") {
-
+@main("Login") {
     <script type='text/javascript' src='@routes.Assets.versioned("javascripts/index.js")'></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -36,32 +30,19 @@
             </nav>
         </div>
     </header>
-    <head><b>User Settings</b></head>
-
+    <br>
+    <br>
+    <br>
+    <br>
     <br>
     <br>
     <br>
     <center>
     <body>
-        <b1>Get user</b1>
-        <form class="input-form" action="@routes.UserAccountController.getUser()" method="get">
-            @CSRF.formField
-            <input type="text" name="id" id="id_input">
-            <input type="submit" value="Get user">
-        </form>
-        <b1>Get all users</b1>
-        <form class="input-form" action="@routes.UserAccountController.listUsers()" method="get">
-            <input type="submit" value="Get all users">
-        </form>
-        @*<form class="input-form" action="@routes.UserAccountController.checkLogin()" method="post">*@
-            @*CSRF.formField*@
-            @*<input type="number" name="id" id="user_id_input">*@
-            @*<input type="password" name="password" id="user_password_input">*@
-            @*<input type="submit" value="Login">*@
-        @*</form>*@
-
         <form class="input-form" action="@routes.UserAccountController.logout()" method="post">
             @CSRF.formField
+            <input type="text" name="name" id="user_id_input">
+            @*<input type="text" name="password" id="user_password_input">*@
             <input type="submit" value="Logout">
         </form>
     </body>
