@@ -86,6 +86,8 @@
 
                 <div id="ratings">
                     <br>
+                    Rate this Trip!
+                    <br>
 
                     <button id="rating_submit" onclick="submitRating()">Rate</button>
                     <select id="route_rating">
@@ -95,6 +97,44 @@
                         <option value="4">4</option>
                         <option value="5">5</option>
                     </select>
+                    <br>
+                    <br>
+                    Share your trip on Twitter!
+                    <br>
+
+                    <div id="twitterButton">
+                        <a
+                        href="https://twitter.com/share"
+                        id="tweet"
+                        class="twitter-share-button"
+                        data-url=""
+                        data-text="Check out this Trip!"
+                        data-hashtags="RoadTrippin"
+                        data-size="large"
+                        data-count="none">Tweet</a>
+
+                        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                    </div>
+
+                    <script type="text/javascript">
+                            var route = $("#routeID").text();
+                            $('#twitterButton').click(function (e) {
+                                $("a").attr("data-url", "http://localhost:9000/trip/route="+route);
+                                alert("http://localhost:9000/trip/route="+route)
+                            });
+                    </script>
+
+
+                        <!--<button id="hide" onclick="test()">Test</button>-->
+
+                    <script>
+                        function test(){
+                            //alert($('input#foo').val());
+                            alert($("#routeID").text());
+
+                        }
+                    </script>
+
                 </div>
             </center>
         </div>
@@ -107,7 +147,19 @@
 
 
 
+    <script>
+            function getURL() {
+                var url = "http://localhost:9000/trip/route="
+                //var url = "http://fierce-hamlet-30159.herokuapp.com/trip/route=";
+                var routeID = $("#routeID").text();
+                var finalRoute = url+routeID;
+                var twitterURL = document.getElementById("twitter-call");
+                twitterURL.setAttribute("data-url",finalRoute);
 
+
+
+            }
+    </script>
 
     <script>
             //Initializes the map and sets up routing services.
