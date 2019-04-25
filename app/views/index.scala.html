@@ -102,34 +102,38 @@
                     Share your trip on Twitter!
                     <br>
 
+                    <div id="twitterButton">
+                        <a
+                        href="https://twitter.com/share"
+                        id="tweet"
+                        class="twitter-share-button"
+                        data-url=""
+                        data-text="Check out this Trip!"
+                        data-hashtags="RoadTrippin"
+                        data-size="large"
+                        data-count="none">Tweet</a>
 
-                    <a
-                    onclick="getURL()"
-                    href="https://twitter.com/share?ref_src=twsrc%5Etfw"
-                    id = "twitter-call"
-                    class="twitter-share-button"
-                    data-size="large"
-                    data-text="Check out this Trip!"
-                    data-hashtags="RoadTrippin"
-                    data-show-count="false">
-                    Tweet</a>
-                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                    </div>
 
-                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-                    <script>
-                            $(document).ready(function(){
-                                $("#hide").click(function(){
-                                    $("p").hide();
-                                });
-                                $("#show").click(function(){
-                                    $("p").show();
-                                });
+                    <script type="text/javascript">
+                            var route = $("#routeID").text()
+                            $('#twitterButton').click(function (e) {
+                                $("a").attr("data-url", "http://localhost:9000/trip/route="+route);
+                                alert("http://localhost:9000/trip/route="+route)
                             });
                     </script>
 
-                    <button id="hide">Hide</button>
-                    <button id="show">Show</button>
+
+                        <!--<button id="hide" onclick="test()">Test</button>-->
+
+                    <script>
+                        function test(){
+                            //alert($('input#foo').val());
+                            alert($("#routeID").text());
+
+                        }
+                    </script>
 
                 </div>
             </center>
@@ -147,12 +151,13 @@
             function getURL() {
                 var url = "http://localhost:9000/trip/route="
                 //var url = "http://fierce-hamlet-30159.herokuapp.com/trip/route=";
-                var routeID = document.getElementById("routeID").style.visibility = "visible";
-                //document.getElementById("myP").style.visibility = "hidden";
-                console.log(routeID)
+                var routeID = $("#routeID").text();
                 var finalRoute = url+routeID;
                 var twitterURL = document.getElementById("twitter-call");
                 twitterURL.setAttribute("data-url",finalRoute);
+
+
+
             }
     </script>
 
