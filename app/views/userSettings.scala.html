@@ -37,15 +37,12 @@
         </div>
     </header>
     <head><b>User Settings</b></head>
+
+    <br>
+    <br>
+    <br>
+    <center>
     <body>
-        <b1>Update user</b1>
-        <form class="input-form" action="@routes.UserAccountController.updateUser()" method="put">
-            @CSRF.formField
-            <input type="text" name="id" id="id_input">
-            <input type="text" name="name" id="user_name_input">
-            <input type="text" name="location" id="user_location_input">
-            <input type="submit" value="Update user">
-        </form>
         <b1>Get user</b1>
         <form class="input-form" action="@routes.UserAccountController.getUser()" method="get">
             @CSRF.formField
@@ -68,5 +65,5 @@
             <input type="submit" value="Logout">
         </form>
     </body>
-    <footer></footer>
+    </center>
 }

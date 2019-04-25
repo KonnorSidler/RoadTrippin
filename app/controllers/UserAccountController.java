@@ -1,7 +1,6 @@
 package controllers;
 
 import models.UserAccount;
-import org.h2.engine.User;
 import play.libs.Json;
 import play.data.Form;
 import play.data.FormFactory;
@@ -35,26 +34,12 @@ public class UserAccountController extends Controller {
         Form<UserAccount> userForm = formFactory.form(UserAccount.class).bindFromRequest(request);
         UserAccount acc = userForm.get();
         UserAccount findUser = UserAccount.find.byId(acc.getId());
-//        checkLogin(request);
-        return redirect("/trip").addingToSession(request, "user", findUser.getName());
+        return redirect("/trip").addingToSession(request, "username", "");
     }
 
     public Result logout(Http.Request request){
-        return redirect("/").removingFromSession(request, "user_account");
+        return redirect("/").removingFromSession(request, "username");
     }
-
-//    public Result checkLogin(Http.Request request) {
-//
-//        /*checks if login is valid, isn't currently working BUT
-//        when you login with an invalid ID, it's a nullpointer, so login is definitely working but not fully
-//
-//         */
-//
-//        return request.session()
-//                .getOptional("user_account")
-//                .map(userAccount -> ok("Hello " + userAccount))
-//                .orElseGet(() -> unauthorized("Oops, you are not connected"));
-//    }
 
     public Result createUserScreen(){
         Form<UserAccount> userForm = formFactory.form(UserAccount.class);
@@ -78,26 +63,13 @@ public class UserAccountController extends Controller {
         return ok(Json.toJson(users));
     }
 
-    public Result updateUser(Http.Request request){
-        Form<UserAccount> userForm = formFactory.form(UserAccount.class).bindFromRequest(request);
-        UserAccount user = userForm.get();
-        UserAccount newUserInfo = UserAccount.find.byId(user.getId());
-        newUserInfo.setLocation(user.getLocation());
-        newUserInfo.setName(user.getName());
-        newUserInfo.save();
-        return ok(userSettings.render(userForm));
-    }
-
     public Result createUser(Http.Request request){
         Form<UserAccount> userForm = formFactory.form(UserAccount.class).bindFromRequest(request);
         UserAccount user = userForm.get();
         UserAccount newUser = new UserAccount();
         newUser.setLocation(user.getLocation());
-        newUser.setId(System.currentTimeMillis());
-        newUser.setName(user.getName());
-        newUser.setPassword(user.getPassword());
+        newUser.setUsername(user.getUsername());
         newUser.save();
-
-        return ok(userSettings.render(userForm)).addingToSession(request, "user", newUser.longToString(newUser.getId()));
+        return redirect("/trip").addingToSession(request, "user", newUser.longToString(newUser.getId()));
     }
 }

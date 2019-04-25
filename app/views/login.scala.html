@@ -31,14 +31,19 @@
         </div>
     </header>
     <body>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
     <section id="options">
         <h1>
         <div id="side_bar">
             <center>
                 <form class="input-form" action="@routes.UserAccountController.login()" method="post">
                     @CSRF.formField
-                    <input type="text" name="name" id="user_name_input">
-                    <input type="text" name="password" id="user_password_input">
+                    <input type="text" name="username" id="user_username_input">
                     <input type="submit" value="Login">
                 </form>
                 @*<form class="input-form" action="@routes.UserAccountController.checkLogin()" method="post">*@

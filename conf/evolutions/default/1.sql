@@ -30,9 +30,9 @@ create table trip_rating (
 
 create table user_account (
   id                            bigserial not null,
-  name                          varchar(255),
+  username                      varchar(255),
   location                      varchar(255),
-  password                      varchar(255),
+  constraint uq_user_account_username unique (username),
   constraint pk_user_account primary key (id)
 );
 

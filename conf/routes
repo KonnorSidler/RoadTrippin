@@ -41,8 +41,6 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 GET     /user                       controllers.UserAccountController.userSettingsScreen()
 GET     /user/find                  controllers.UserAccountController.getUser(request: Request)
 +nocsrf
-PUT     /user                       controllers.UserAccountController.updateUser(request: Request)
-+nocsrf
 POST    /user                       controllers.UserAccountController.createUser(request: Request)
 GET     /user/all                   controllers.UserAccountController.listUsers()
 +nocsrf
