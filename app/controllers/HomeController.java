@@ -85,7 +85,7 @@ public class HomeController extends Controller {
     }
 
     public Result generateRandomRouteList(Http.Request request) {
-      int resultCount = 6;
+      int resultCount = 5;
       List<TripInfo> trips = new ArrayList<TripInfo>();
       List<TripInfo> allTrips = TripInfo.find.all();
       int count = allTrips.size();
@@ -101,13 +101,13 @@ public class HomeController extends Controller {
     }
 
     public Result generateRecentRouteList(Http.Request request) {
-      int resultCount = 6;
+      int resultCount = 5;
       List<TripInfo> trips = new ArrayList<TripInfo>();
       List<TripInfo> allTrips = TripInfo.find.all();
       int size = allTrips.size();
       Long lastRouteId = new Long(size);
 
-      if(size < 6) {
+      if(size < 5) {
           long count = 1;
           for(int i = 0; i < size; i++) {
             trips.add(TripInfo.find.byId(count));
