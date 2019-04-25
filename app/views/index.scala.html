@@ -102,16 +102,35 @@
                     Share your trip on Twitter!
                     <br>
 
-                    <a href="https://twitter.com/share?ref_src=twsrc%5Etfw"
-                        id = "twitter-call"
+
+                    <a
+                    onclick="getURL()"
+                    href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+                    id = "twitter-call"
                     class="twitter-share-button"
                     data-size="large"
-                    data-url= ""
                     data-text="Check out this Trip!"
                     data-hashtags="RoadTrippin"
                     data-show-count="false">
                     Tweet</a>
                     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+                    <script>
+                            $(document).ready(function(){
+                                $("#hide").click(function(){
+                                    $("p").hide();
+                                });
+                                $("#show").click(function(){
+                                    $("p").show();
+                                });
+                            });
+                    </script>
+
+                    <button id="hide">Hide</button>
+                    <button id="show">Show</button>
+
                 </div>
             </center>
         </div>
@@ -124,7 +143,18 @@
 
 
 
-
+    <script>
+            function getURL() {
+                var url = "http://localhost:9000/trip/route="
+                //var url = "http://fierce-hamlet-30159.herokuapp.com/trip/route=";
+                var routeID = document.getElementById("routeID").style.visibility = "visible";
+                //document.getElementById("myP").style.visibility = "hidden";
+                console.log(routeID)
+                var finalRoute = url+routeID;
+                var twitterURL = document.getElementById("twitter-call");
+                twitterURL.setAttribute("data-url",finalRoute);
+            }
+    </script>
 
     <script>
             //Initializes the map and sets up routing services.
@@ -215,12 +245,6 @@
                         console.log(data);
                         y.innerHTML = parseInt(data);
                         y.style.display = "none";
-
-                        var url = "http://fierce-hamlet-30159.herokuapp.com/trip/route=";
-                        var routeID = document.getElementById("routeID");
-                        var finalRoute = url+routeID;
-                        var twitterURL = document.getElementById("twitter-call");
-                        twitterURL.setAttribute("data-url",finalRoute);
                     },
                     error : function(data) {
                         console.log("Fail");
