@@ -23,4 +23,4 @@ In the Pipeline:
   -	Home
   -	Work 
   -	Frequently visited places
-
+[![Hits-of-Code](https://hitsofcode.com/github.com/KonnorSidler/RoadTrippin)](https://hitsofcode.com/view/github.com/KonnorSidler/RoadTrippin)
